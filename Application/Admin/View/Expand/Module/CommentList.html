@@ -1,0 +1,28 @@
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th width="20"><input type="checkbox" id="chkall" title="全选/取消" /></th>
+        <th width="80">昵称</th>
+        <th>评论内容</th>
+        <th width="140">发表日期</th>
+        <th width="100">IP</th>
+        <th width="100">状态</th>
+        <th width="100">管理</th>
+    </tr>
+    </thead>
+    <empty name="comments"><tr><td colspan="7">没有资料</td></tr></empty>
+    <tbody>
+    <volist name="comments" id="vocomment">
+        <tr id="tr_{$vocomment.id}">
+            <td><input name="id" type="checkbox" value="{$vocomment.id}" /></td>
+            <td>{$vocomment.username}</td>
+            <td class="txt_left"><a href="index.php?s=/Home/List/info/id/{$vocomment.contentid]}" target="_blank">{$vocomment.content}</a></td>
+            <td>{$vocomment.createtime|date="Y-m-d H:i:s",###}</td>
+            <td>{$vocomment.postip}</td>
+            <td><empty name="vocomment.reply">未回复<else/>已回复</empty>/<if condition="$vocomment.islock eq 0">未审<else/>已审</if></td>
+            <td><a href="{:U('Comment/commentEdit',array('comId'=>$vocomment['id']))}">查看/回复</a>　<a href="javascript:;" class="delete" rel="{:U('Comment/delCom',array('delId'=>$vocomment['id']))}">删除</a></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+{$page}

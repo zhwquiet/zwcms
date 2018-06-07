@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<include file="Common/meta"/>
+	<link href="__PUBLIC__/Home/pc/Css/login.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h3>会员登录</h3>
+    <form class="loginForm" method="post">
+        <div class="login">
+        <div class="row">
+            <label class="cell" for="user">账&nbsp;&nbsp;&nbsp;号</label>
+            <input class="cell" type="text" name="username" placeholder="请输入用户名或手机号" id="user"/>
+        </div>
+        <div class="row">
+            <label class="cell" for="pass">密&nbsp;&nbsp;&nbsp;码</label>
+            <input class="cell" type="password" name="password" placeholder="请输入密码" id="pass"/>
+        </div>
+        <div class="row">
+            <label class="cell" for="verify">验证码</label>
+            <input class="verify" type="text" name="verify" placeholder="验证码4位" maxlength="4" id="verify"/>
+            <img class="verImg" id="verifycode" src="/code_verify.html" title="看不清？点击刷新" onclick="this.src+='&'+Math.random()"/>
+        </div>
+        <div class="row">
+            <input type="submit" class="btnSubmit" value="登录"/>
+            <input type="reset" class="btnReset" value="取消"/>
+        </div>
+        </div>
+    </form>
+<script>
+    $('.loginForm').validator({
+        beforeSubmit:function(){$("input[type='submit']").attr('disabled',true)},
+        stopOnErr:true,
+        theme:'yellow_top',
+        ignore:'hidden',
+        valid:function(){
+            $.ajax({
+                url:"{:U('Login/validate')}",
+                type:'post',
+                data:$('.loginForm').serialize(),
+                dataType:"json",
+                success:function(info){
+                    if(info.success){
+                        layer.msg(info.msg, { icon: 1 });
+                        setTimeout(function(){
+                            location.href="{:U('Index/index')}";
+                        },1000);
+                    }else{
+                    	$("#verifycode").click();
+                        layer.msg(info.msg, { icon: 2 });
+                        $("input[type='submit']").attr('disabled',false);
+                    }
+                },
+                error:function(){}
+            });
+        },
+        invalid:function(){$("input[type='submit']").attr('disabled',true)},
+        fields:{
+            'username':'required',
+            'password':'required',
+            'verify':'required'
+        }
+    });
+</script>
+</body>
+</html>

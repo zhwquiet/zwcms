@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="Common/meta"/>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+<!-- 站内导航   -->
+<div id="position">
+ 	您所在的位置：<a href="index.php">首页</a>
+	{$classid|getpostion='>'}
+</div>
+
+<div id="container">
+	<div class="left">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$classname}
+		</div>
+          <div class="pc_body">
+              <div class="newslist">
+              <ul>
+                <zxcms:rs table="content a" join="left join zx_model_job b on a.id=b.cid" field="a.id,a.isurl,a.url,a.title,a.style,a.categoryid,b.neednum" where="a.categoryid in($sonid) and a.islock=1" order="a.ontop desc,a.id desc" page="true" limit="$pagenum" id="v">
+					<li>
+						<span><eq name="v.neednum" value="0">若干<else/>{$v.neednum}</eq>人</span>
+						<a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq> {$v.style}>{$v.title}</a>
+					</li>
+					<zxcms:eof/>
+					<li>没有资料</li>
+				</zxcms:rs>  
+              </ul>
+              </div>
+				{$pages}
+          </div>
+      </div>
+	<div class="right">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$parentname}
+		</div>
+		<div class="pc_body p15">
+			<ul class="category">
+				<zxcms:rs table="category" field="id,catename" where="pid=$classid" order="ordnum,id" id="v">
+					<li <eq name="v.id" value="$classid">class="hover"</eq>>
+						<span>>></span>
+						<a href="{:U('List/index',array('classid'=>$v['id']))}" title="{$v.catename}">{$v.catename}</a>
+					</li>
+				<zxcms:eof/>
+					<eq name="pid" value="0">
+					<li class="hover">
+					<span>>></span>
+					<a href="{:U('List/index',array('classid'=>$classid))}">{$classname}</a></li>
+					<else/><li>没有资料</li>
+					</eq>
+				</zxcms:rs>
+			</ul>
+		</div>
+		<!-- 联系我们  区块调用 -->
+		<div class="pc_header mt10">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+		</div>
+		<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+
+	</div>
+</div>
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+</body>
+</html>

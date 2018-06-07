@@ -1,0 +1,24 @@
+<div class="newslist">
+	<notempty name="booklist">
+	<volist name="booklist" id="v">
+	<div class="book">
+		<div class="text">
+			<div class="div">
+				<div class="div">
+					<div class="base"><span>{$v.createtime|date='Y/m/d H:i:s',###}</span>{$v.username}</div>
+					<div class="content">{$v.content}</div>
+					<notempty name="v.reply">
+						<div class="reply">
+						<strong>回复：</strong>{$v.reply}
+						</div>
+					</notempty>
+				</div>   
+			</div>
+		</div>
+	</div>
+	</volist>
+	<else/>
+	暂无留言
+	</notempty>
+</div>
+{$pages}

@@ -1,0 +1,35 @@
+<select id="cate_search">
+<option value="0">选择产品分类</option>
+<volist name="catelist" id="v">
+<option value="{$v.id}" <eq name="v.id" value="$classid">selected</eq>>{$v.catename}</option>
+</volist>
+</select>
+<select id="content_search">
+	<option value="0">选择产品名称</option>
+</select>
+
+<script>
+var cateid = $("#cate_search").val();
+var contentid = '{$id}';
+if(cateid != '0'){
+	$.ajax({
+		url:"/search_content.html",
+		data:"classid="+cateid,
+		success:function(data){
+			$.each(data,function(key,val){
+				if(contentid == val['id']){
+					$("#content_search").append("<option value='"+val['id']+"' selected>"+val['title']+"</option>");
+				}else{
+					$("#content_search").append("<option value='"+val['id']+"'>"+val['title']+"</option>");
+				}	
+			});
+		}
+	});
+}
+$("#cate_search").change(function(){
+	window.location.href="/list/"+$(this).val()+".html";
+});
+$("#content_search").change(function(){
+	window.location.href="/info/"+$(this).val()+".html";
+});
+</script>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<include file="Common/meta"/>
+    <if condition="$iscomment eq 1 and $syscomment">
+    <link href="__PUBLIC__/Home/pc/Css/comment.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/Home/Js/comment.js"></script>
+    <script>
+	    var infoid="{$id}";
+		var ispage = false;//评论信息是否分页
+		var pageCount = 10;//评论每页显示条数
+		CommentpageAjax(1);
+	</script>
+    </if>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+
+<!-- 站内导航   -->
+<div id="position">
+	您所在的位置：<a href="index.php">首页</a>
+	{$classid|getpostion='>'} > 正文
+</div>
+
+<div id="container">
+      <div class="left">
+          <!--left begin-->
+          <div class="pc_header">
+          	<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$classname}
+          </div>
+          <div class="pc_body newsshow">
+          		<h1>{$title}</h1>
+              <div class="info">日期：{$createtime|date="Y-m-d",###}　人气：<span id="hits">{$hits}</span>
+              <if condition="$iscomment eq 1 and $syscomment">
+              　				评论：<span id="commentnum"><a href="/comment/{$id}.html">{$comments}</a></span>
+              </if>
+              </div>
+              <div class="job_h1"><strong>招聘人数：</strong><eq name="info.neednum" value="0">若干<else/>{$info.neednum}</eq>人</div>
+              <div class="job_h1"><strong>工作地点：</strong>{$info.workspace}</div>
+              <div class="job_h1"><strong>岗位职责：</strong></div>
+              {$info.workduty}
+              <div class="job_h1"><strong>工作要求：</strong></div>
+              <div class="content">
+                {$info.content}
+                <strong>本文网址：</strong><a href="{$contenturl}" title="{$title}">{$contenturl}</a>
+                  
+              </div>
+          
+              <div class="pre">上一篇：
+              <notempty name="pre"><a href="{$pre|getinfourl}">{$pre.title}</a><else/>没有啦</notempty>
+              </div>
+              <div class="next">下一篇：
+              <notempty name="next"><a href="{$next|getinfourl}">{$next.title}</a><else/>没有啦</notempty>
+              </div>
+          </div>
+          <if condition="$iscomment eq 1 and $syscomment">
+          <div class="pc_header mt10">
+          <span><a href="/comment/{$id}.html">更多>></a></span>
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />评论信息
+          </div>
+          <div class="pc_body newsshow">
+            <div id="commenttop"></div>
+          </div>
+          <div class="pc_header mt10">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />我要评论
+          </div>
+          <div class="pc_body newsshow">
+            <div id="comment_staus"></div>
+          </div>
+          </if>
+          <!--left over-->
+      </div>
+      <div class="right">
+          
+          <!-- 联系我们  区块调用 -->
+			<div class="pc_header mt10">
+				<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+			</div>
+			<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+      
+      </div>
+</div>
+
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+</body>
+</html>

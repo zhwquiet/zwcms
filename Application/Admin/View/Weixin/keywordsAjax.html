@@ -1,0 +1,50 @@
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th width="100">ID</th>
+        <th width="100">排序</th>
+        <th>关键字</th>
+        <th width="130">类型</th>
+        <th width="130">匹配方式</th>
+        <th width="80">状态</th>
+        <th width="80">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <empty name="list">
+        <tr>
+            <td colspan="7">暂无资料</td>
+        </tr>
+    </empty>
+    <volist name="list" id="v">
+        <tr id="tr_{$v.id}">
+            <td>{$v.id}</td>
+            <td>{$v.sort}</td>
+            <td class="t-left">{$v.keyword}</td>
+            <td>
+                <eq name="v.type" value="1">
+                    文本回复
+                <else/>
+                    图文素材
+                </eq>
+            </td>
+            <td>
+                <eq name="v.method_type" value="1">
+                    完全匹配
+                    <else/>
+                    模糊匹配
+                </eq>
+            </td>
+            <td>
+                <eq name="v.status" value="1">
+                    启用
+                <else/>
+                    锁定
+                </eq>
+            </td>
+            <td><a href="{:U('Weixin/keywordsAdd',array('id'=>$v['id']))}">编辑</a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="delete" rel="{:U('Weixin/keywordsDel',array('id'=>$v['id']))}">删除</a></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+{$page}

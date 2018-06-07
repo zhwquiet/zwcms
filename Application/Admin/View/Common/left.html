@@ -1,0 +1,45 @@
+<div id="sidebar" class="sidebar responsive menu">
+
+	<ul class="nav nav-list">
+
+		<li class="<if condition="$method eq 'index'">active</if>">
+			<a href="{$server}/admin.php">
+				<i class="menu-icon iconfont icon-home"></i>
+				<span class="menu-text"> 首页 </span>
+			</a>
+			<b class="arrow"></b>
+		</li>
+
+		<volist name="menulist" id="v">
+		<li class="<if condition="$v['method'] eq $method">active</if>">
+		<a href="<notempty name='v.url'>{$server}/admin.php/{$v.url}.html<else/>#</notempty>" <empty name='v.url'>class="dropdown-toggle"</empty>>
+		<i class="menu-icon iconfont {$v.icon}"></i>
+		<span class="menu-text"> {$v.title} </span>
+		<notempty name="v.child">
+		<b class="arrow fa fa-angle-down"></b>
+		</notempty>
+		</a>
+		<b class="arrow"></b>
+
+		<notempty name="v.child">
+		<ul class="submenu">
+			<volist name="v.child" id="v1">
+			<li class="<if condition="($v['method'] eq $method) and ($v1['method'] eq $child_method)">active</if>">
+			<a href="{$server}/admin.php/{$v1.url}.html">
+				<i class="menu-icon fa fa-caret-right"></i>
+				{$v1.title}
+			</a>
+			<b class="arrow"></b>
+			</li>
+			</volist>
+		</ul>
+		</notempty>
+		</li>
+		</volist>
+
+	</ul><!-- /.nav-list -->
+	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+		<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+	</div>
+
+</div>

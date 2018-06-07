@@ -1,0 +1,167 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Slide/index')}">{$classtitle}</a></li>
+            <li><a href="{:U('Slide/listpage',array('classid'=>$classid))}">列表管理</a></li>
+            <li>添加</li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post">
+                            <input type="hidden" name="id" value="{$info.id}"/>
+                            <input type="hidden" name="slide_id" value="{$classid}"/>
+                            <div class="form_group">
+                                <div class="form_txt">名称：</div>
+                                <div class="form_input">
+                                    <input type="text" name="title" size="50" maxlength="20" class="ip" value="{$info.title}" data-rule="名称:required;" >
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">缩略图：</div>
+                                <div class="form_input">
+                                    <input type="text" size="50" maxlength="255" class="ip" value="{$info.picid|getattachurl}" disabled/>
+                                    <input type="hidden" name="picid" value="{$info.picid}"/>
+                                    <input type="button" value="上传" id="upbtn" data-type="1" class="bnt bnt_save" />　<span>可以为空</span>
+                                </div>
+                                <div class="form_input img-div" style="display:none;">
+                                    <img src="{$info.picid|getattachurl}">
+                                    <i class="iconfont icon-close img-del"></i>
+                                </div>
+                            </div>
+                            <div class="form_group" id="modetype">
+                                <div class="form_txt">链接类型：</div>
+                                <div class="form_input">
+                                    <label class="line-height-1 blue">
+                                        <input name="type" value="0" type="radio" class="ace" <if condition="($info['type'] eq '0') or ($info['type'] eq '')">checked</if>>
+                                        <span class="lbl">无</span>
+                                    </label>
+                                    <label class="line-height-1 blue">
+                                        <input name="type" value="1" type="radio" class="ace" <eq name="info.type" value="1">checked</eq>>
+                                        <span class="lbl">栏目</span>
+                                    </label>
+                                    <label class="line-height-1 blue">
+                                        <input name="type" value="2" type="radio" class="ace" <eq name="info.type" value="2">checked</eq>>
+                                        <span class="lbl">内容</span>
+                                    </label>
+                                    <label class="line-height-1 blue">
+                                        <input name="type" value="3" type="radio" class="ace" <eq name="info.type" value="3">checked</eq>>
+                                        <span class="lbl">外链</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="typeshow">
+                                <div class="form_group type1" <neq name="info.type" value="1">style="display:none;"</neq>>
+                                    <div class="form_txt">选择栏目：</div>
+                                    <div class="form_input" style="width:200px">
+                                        <select name="category_id" class="ip beautify_input">
+                                            <volist name="category_list" id="v">
+                                                <option value="{$v.id}" <if condition="($info['type'] eq 1) and ($v['id'] eq $info['item_id'])">selected</if>>
+                                                <for start="1" end="$v['level']">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </for>{$v.catename}
+                                                </option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form_group type2" <neq name="info.type" value="2">style="display:none;"</neq>>
+                                    <div class="form_txt">选择内容：</div>
+                                    <div class="form_input" style="width:200px">
+                                        <select name="content_id" class="ip beautify_input">
+                                            <volist name="content_list" id="v">
+                                                <option value="{$v.id}" <if condition="($info['type'] eq 2) and ($v['id'] eq $info['item_id'])">selected</if>>
+                                                {$v.title}
+                                                </option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form_group type3" <neq name="info.type" value="3">style="display:none;"</neq>>
+                                    <div class="form_txt">链接地址：</div>
+                                    <div class="form_input">
+                                        <input type="text" name="url" size="50" maxlength="50" class="ip" value="{$info.url}" data-rule="外链地址:url;" >
+                                        <span>请以http://或https://开头</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">排序：</div>
+                                <div class="form_input">
+                                    <input type="text" name="ordnum" size="30" maxlength="20" class="ip" value="{$info.ordnum|default=0}" onkeyup="checkInt(this)"/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">打开方式：</div>
+                                <div class="form_input">
+                                    <label class="line-height-1 blue">
+                                        <input name="mode" value="1" type="radio" class="ace" <neq name="info.mode" value="2">checked</neq>>
+                                        <span class="lbl">默认方式</span>
+                                    </label>
+                                    <label class="line-height-1 blue">
+                                        <input name="mode" value="2" type="radio" class="ace" <eq name="info.mode" value="2">checked</eq>>
+                                        <span class="lbl">新窗口打开</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">显示：</div>
+                                <div class="form_input">
+                                    <label class="line-height-1 blue">
+                                        <input name="isshow" value="1" type="radio" class="ace" <neq name="info.isshow" value="0">checked</neq>>
+                                        <span class="lbl">是</span>
+                                    </label>
+                                    <label class="line-height-1 blue">
+                                        <input name="isshow" value="1" type="radio" class="ace" <eq name="info.isshow" value="0">checked</eq>>
+                                        <span class="lbl">否</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="javascript:goback();" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+
+        $("#modetype").find("input").click(function () {
+            $(".typeshow").find(".form_group").hide();
+            $(".typeshow").find(".type"+$(this).val()).show();
+        });
+
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('Slide/listadd')}",
+            loadurl:"{:U('Slide/listpage',array('classid'=>$classid))}"
+        });
+    </script>
+</block>

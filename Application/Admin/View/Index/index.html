@@ -1,0 +1,71 @@
+<extend name="Common/base"/>
+
+<block name="body">
+<!-- #section:basics/content.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="/">首页</a>
+		</li>
+	</ul><!-- /.breadcrumb -->
+
+
+	<!-- /section:basics/content.searchbox -->
+</div>
+
+<div class="page-content">
+	<!-- /section:settings.box -->
+	<div class="page-content-area">
+
+		<div class="row">
+			<div class="main_body">
+				<div class="col_right">
+					<div class="main_bg">
+						<div class="subject">官方通知</div>
+						<ul class="topnews" id="notice"><li><a href="http://news.sdcms.cn/notice-93.html" title="三网合一企业网站管理系统V1.5版本发布" target="_blank">三网合一企业网站管理系统V1.5版本发…</a></li><li><a href="http://news.sdcms.cn/notice-79.html" title="三网合一企业网站管理系统V1.4版本发布" target="_blank">三网合一企业网站管理系统V1.4版本发…</a></li><li><a href="http://news.sdcms.cn/notice-74.html" title="三网合一企业网站管理系统V1.3版本发布" target="_blank">三网合一企业网站管理系统V1.3版本发…</a></li><li><a href="http://news.sdcms.cn/notice-71.html" title="蓝色系列包装行业网站模板上市" target="_blank">蓝色系列包装行业网站模板上市</a></li></ul>
+					</div>
+					<div class="main_bg mt15">
+						<div class="subject"><a href="{:U('Index/logindex')}">更多&gt;&gt;</a>登录日志</div>
+						<div class="log">
+							<volist name="loglist" id="v">
+								<p><strong><span>{$v.createtime|date="Y-m-d H:i:s",###}</span>{$v.username}</strong>{$v.loginip}<span>{$v.content}</span></p>
+							</volist>
+						</div>
+					</div>
+				</div>
+
+				<div class="col_left">
+					<div class="main_bg">
+						<div class="subject">数据统计</div>
+						<ul class="count">
+							<li>内容<span>{$conCount}</span></li>
+							<li>会员<span>{$meCount}</span></li>
+							<li>订单<span>337</span></li>
+							<li>留言<span>{$boCount}</span></li>
+						</ul>
+					</div>
+
+					<div class="main_bg mt15">
+						<div class="subject">服务器环境</div>
+						<ul class="help">
+							<li><span>操作系统：</span>{:php_uname('s')}</li>
+							<li><span>运行环境：</span>{$Think.server.SERVER_SOFTWARE}</li>
+							<li><span>Php版本：</span>{$Think.PHP_VERSION}</li>
+							<li><span>服务器Ip：</span>{$Think.server.SERVER_ADDR}</li>
+							<li><span>网站端口：</span>{$Think.server.SERVER_PORT}</li>
+							<li><span>运行内存：</span>{:get_cfg_var("memory_limit")}</li>
+							<li><span>上传限制：</span>{:get_cfg_var("upload_max_filesize")}</li>
+							<li><span>提交限制：</span>{:get_cfg_var("post_max_size")}</li>
+							<li><span>脚本超时：</span>{:get_cfg_var("max_execution_time")}秒</li>
+							<li><span>Gzip压缩：</span>{$Think.server.HTTP_ACCEPT_ENCODING}</li>
+							<li><span>客户端Ip：</span>{:	get_real_ip()}</li>
+							<li><span>程序版本：</span>Zwcms 2.0</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.page-content-area -->
+</div><!-- /.page-content -->
+</block>

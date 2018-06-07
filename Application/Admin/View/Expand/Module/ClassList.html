@@ -1,0 +1,38 @@
+<table class="table table-striped table-bordered table-hover">
+<thead>
+    <tr>
+        <th width="60">ID</th>
+        <th width="80">排序</th>
+        <th>类别名称</th>
+        <th width="80">管理</th>
+    </tr>
+</thead>
+<tbody>
+<empty name="cate">
+        <tr>
+            <td colspan="6">没有资料</td>
+        </tr>
+</empty>
+    <volist name="cate" id="vocate">
+    <tr id="cate_{$vocate.classid}" class="item" data-id="{$vocate.classid}">
+        <td>{$vocate.classid}</td>
+        <td>
+            <input type="text" value="{$vocate.ordnum}" size="4" maxlength="4" class="ord_input" onkeyup="checkInt(this)" data-rule="排序:required;digit" >
+        </td>
+        <td class="txt_left">{$vocate.classname}</td>
+        <td>
+            <a href="{:U('Expand/classAdd',array('cateId'=>$vocate['classid']))}">编辑</a>
+            <a href="javascript:;" class="delete" rel="{:U('Expand/cateDel',array('delId'=>$vocate['classid']))}">删除</a>
+        </td>
+    </tr>
+    </volist>
+    <notempty name="cate">
+    <tr class="table_bottom">
+        <td colspan="6">
+            <a class="save_btn_sort" data-url="{:U('Expand/classOrder')}">保存排序</a>
+        </td>
+    </tr>
+    </notempty>
+</tbody>
+</table>
+{$page}

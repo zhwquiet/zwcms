@@ -1,0 +1,333 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Model/index')}">模型管理</a></li>
+            <li><a href="{:U('Model/field',array('id'=>$id))}">字段管理</a></li>
+            <li>添加字段</li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post" id="addModelField">
+                            <input type="hidden" name="modelid" value="{$id}"/>
+                            <div class="form_group">
+                                <div class="form_txt">字段名称：</div>
+                                <div class="form_input">
+                                    my_<input type="text" name="fname" id="t0" size="26" maxlength="20" class="ip" data-rule="字段名称:required;fieldname" /><span>不可重复，不可更改</span><span for="t0" class="msg-box"></span>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">字段别名：</div>
+                                <div class="form_input"><input type="text" name="falias" size="30" maxlength="7" class="ip" data-rule="字段别名:required;" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">字段类型：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="fclass" id="t2" class="ip beautify_input" data-rule="字段类型:required;">
+                                        <option value="">请选择字段类型</option>
+                                        <option value="1">单行文本框</option>
+                                        <option value="2">多行文本框</option>
+                                        <option value="3">下拉列表</option>
+                                        <option value="4">单选按钮</option>
+                                        <option value="5">复选框</option>
+                                        <option value="6">HTML编辑器</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_group dis" id="modetype">
+                                <div class="form_txt">表现形式：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input name="fmode" type="radio" id="t3_1" class="ace" value="1" checked>
+                                        <span class="lbl"> 普通文本</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="fmode" type="radio" id="t3_2" class="ace" value="2">
+                                        <span class="lbl"> 整数</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="fmode" type="radio" id="t3_5" class="ace" value="5">
+                                        <span class="lbl"> 小数</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="fmode" type="radio" id="t3_4" class="ace" value="4">
+                                        <span class="lbl"> 上传</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group dis" id="fupload">
+                                <div class="form_txt">上传类型：</div>
+                                <div class="form_input">
+                                    <select name="fupload" id="t13" class="ip">
+                                        <option value="">请选择上传类型</option>
+                                        <option value="1">图片</option>
+                                        <option value="2">附件</option>
+                                        <option value="3">视频</option>
+                                        <option value="5">Flash</option>
+                                        <option value="4">全部类型</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_group dis" id="datatype">
+                                <div class="form_txt">数据类型：</div>
+                                <div class="form_input" id="typevalue"></div>
+                            </div>
+                            <div class="form_group dis" id="lengths">
+                                <div class="form_txt">字段长度：</div>
+                                <div class="form_input"><input type="text" name="flength" id="t5" size="30" maxlength="3" class="ip" data-rule="字段长度:required;integer;range[1~255]" /><span>1-255</span><span for="t5" class="msg-box"></span></div>
+                            </div>
+                            <div class="form_group" id="fdefault">
+                                <div class="form_txt">默认值：</div>
+                                <div class="form_input"><input type="text" name="fdefault" size="30" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group dis" id="options">
+                                <div class="form_txt">列表内容：</div>
+                                <div class="form_input"><textarea name="foptions" id="t7" class="tt" cols="30" rows="6" data-rule="列表内容:required;"></textarea><span>示范：项目名称|项目值</span><span for="t7" class="msg-box"></span><br><span>一行一个项目</span></div>
+                            </div>
+                            <div class="form_group" id="intro">
+                                <div class="form_txt">字段说明：</div>
+                                <div class="form_input"><textarea name="intro" id="t7" class="tt" cols="30" rows="6"></textarea></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">是否必填：</div>
+                                <div class="form_input" id="mustvalue">
+                                    <label class="checklabel">
+                                        <input name="fismust" type="radio" id="t8_1" class="ace" value="1" checked>
+                                        <span class="lbl"> 是</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="fismust" type="radio" id="t8_0" class="ace" value="0">
+                                        <span class="lbl"> 否</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group dis" id="rules">
+                                <div class="form_txt">验证规则：</div>
+                                <div class="form_input" id="vrule">
+                                </div>
+                            </div>
+                            <div class="form_group" id="fistrim">
+                                <div class="form_txt">去掉两端空格：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input name="fistrim" type="radio" id="t10_1" class="ace" value="1" checked>
+                                        <span class="lbl"> 是</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="fistrim" type="radio" id="t10_0" class="ace" value="0">
+                                        <span class="lbl"> 否</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">字段排序：</div>
+                                <div class="form_input">
+                                    <input name="ordnum" id="t11" type="text" class="ip" value="0" size="30" maxlength="9" data-rule="字段排序:required;integer;" /><span>数字越小越靠前</span><span for="t11" class="msg-box"></span>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">状态：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input name="islock" type="radio" id="t12_1" class="ace" value="1" checked>
+                                        <span class="lbl"> 正常</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="islock" type="radio" id="t12_0" class="ace" value="0">
+                                        <span class="lbl"> 锁定</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="javascript:goback();" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(function(){
+            $("#t2").change(function(){
+                var value=$(this).val();
+                $("#t13").prop('selectedIndex',0);
+                $("#fupload").css("display","none");
+                $("#modetype").css("display","none");
+                $("#lengths").css("display","none");
+                $("#options").css("display","none");
+                $("#fistrim").css("display","none");
+                $("#fdefault").css("display","block");
+                $("[name='fdefault']").attr('maxlength','255');
+                switch (value){
+                    case "1":
+                        var id =$("[name='fmode']:checked").val();
+                        if(id == undefined){
+                            id =1;
+                        }
+                        $("#t3_"+id).click();
+                        $("#modetype").css("display","block");
+                        break;
+                    case "2":
+                        html='';
+                        html+='<select name="fdatatype" class="ip">'
+                        html+='<option value="5">备注</option>'
+                        html+='</select>'
+                        $("#typevalue").html(html);
+                        html='';
+                        html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                        html+='<option value="1">不为空</option>'
+                        html+='</select>'
+                        $("#vrule").html(html);
+                        $("#fistrim").css("display","block");
+                        break;
+                    case "6":
+                        html='';
+                        html+='<select name="fdatatype" class="ip">'
+                        html+='<option value="5">备注</option>'
+                        html+='</select>'
+                        $("#typevalue").html(html);
+                        html='';
+                        html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                        html+='<option value="1">不为空</option>'
+                        html+='</select>'
+                        $("#vrule").html(html);
+                        break;
+                    default:
+                        html='';
+                        html+='<select name="fdatatype" class="ip">'
+                        html+='<option value="1">文本</option>'
+                        html+='</select>'
+                        $("#typevalue").html(html);
+                        html='';
+                        html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                        html+='<option value="1">不为空</option>'
+                        html+='</select>'
+                        $("#vrule").html(html);
+                        $("#options").css("display","block");
+                        break;
+                }
+                $("[name='fismust']:checked").click();
+            })
+            $("#t3_1").click(function(){
+                var html='';
+                html+='<select name="fdatatype" class="ip">'
+                html+='<option value="1">文本</option>'
+                html+='</select>'
+                $("#typevalue").html(html);
+                html='';
+                html+='<select name="frules" class="ip">'
+                html+='<option value="">请选择验证规则</option>'
+                html+='<option value="1">不为空</option>'
+                html+='<option value="4">电话</option>'
+                html+='<option value="5">手机</option>'
+                html+='<option value="6">邮箱</option>'
+                html+='<option value="8">邮编</option>'
+                html+='<option value="9">QQ</option>'
+                html+='<option value="10">网址</option>'
+                html+='</select>'
+                $("#vrule").html(html);
+                $("#fupload").css("display","none");
+                $("#lengths").css("display","block");
+                $("#fdefault").css("display","block");
+                $("#fistrim").css("display","block");
+                $("#t5").keyup();
+            })
+            $("#t3_2").click(function(){
+                var html='';
+                html+='<select name="fdatatype" class="ip">'
+                html+='<option value="2">数字</option>'
+                html+='</select>'
+                $("#typevalue").html(html);
+                html='';
+                html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                html+='<option value="2">整数</option>'
+                html+='</select>'
+                $("#vrule").html(html);
+                $("#fupload").css("display","none");
+                $("#lengths").css("display","none");
+                $("#fdefault").css("display","block");
+                $("#fistrim").css("display","block");
+                $("[name='fdefault']").attr('maxlength','255');
+            })
+            $("#t3_4").click(function(){
+                var html='';
+                html+='<select name="fdatatype" class="ip">'
+                html+='<option value="1">文本</option>'
+                html+='</select>'
+                $("#typevalue").html(html);
+                html='';
+                html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                html+='<option value="1">不为空</option>'
+                html+='</select>'
+                $("#vrule").html(html);
+                $("#lengths").css("display","none");
+                $("#fupload").css("display","block");
+                $("#fdefault").css("display","none");
+                $("#fistrim").css("display","none");
+                $("[name='fdefault']").attr('maxlength','255');
+            })
+            $("#t3_5").click(function(){
+                var html='';
+                html+='<select name="fdatatype" class="ip">'
+                html+='<option value="3">货币</option>'
+                html+='</select>'
+                $("#typevalue").html(html);
+                html='';
+                html+='<select name="frules" class="ip" data-rule="验证规则:required;">'
+                html+='<option value="3">小数</option>'
+                html+='</select>'
+                $("#vrule").html(html);
+                $("#fupload").css("display","none");
+                $("#lengths").css("display","none");
+                $("#fdefault").css("display","block");
+                $("#fistrim").css("display","block");
+                $("[name='fdefault']").attr('maxlength','255');
+            })
+
+            $("#t8_1").on("click",function(){$("#rules").css("display","block");})
+            $("#t8_0").on("click",function(){$("#rules").css("display","none");})
+            $("#t5").on("keyup",function(){
+                var length = $(this).val();
+                var fdefault = $("[name='fdefault']");
+                var str = fdefault.val();
+                fdefault.attr('maxlength',length);
+                if(str.length > length){
+                    fdefault.val(str.substring(0,length));
+                }
+            });
+        })
+        $(".formname").MotorsSubmit({
+            theme:"yellow_right_effect",
+            ajaxurl:"{:U('Model/saveFieldAll')}",
+            loadurl:"{:U('Model/field',array('id'=>$id))}"
+        });
+    </script>
+</block>

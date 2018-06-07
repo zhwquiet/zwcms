@@ -1,0 +1,113 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>回收站</span></li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="nav_menu">
+                        <div class="search">
+                            <form id="searchForm" onsubmit="return false;">
+                                <input type="hidden" name="islock" value="-1"/>
+                                <input type="text" name="keyword" class="ip" value="" placeholder="请输入关键字" onfocus="if(this.value==defaultValue)this.value=''" onblur="if(this.value=='')this.value=defaultValue">
+                                <input type="button" class="btn btn-primary btn-round" onclick="javascript:ajaxContent(1);" value="查询">
+                            </form>
+                        </div>
+                        <ul>
+                            <li class="dropdown">
+                                <a>
+                                    <span class="icon iconfont icon-iconplsd"></span>批量操作↓
+                                </a>
+                                <dl>
+                                    <dt><a id="act_con_recover">批量恢复</a></dt>
+                                    <dt><a id="act_con_del">批量删除</a></dt>
+                                </dl>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:recover('确定要全部恢复？','');">
+                                    <span class="icon iconfont icon-beifenhuifu"></span>全部恢复
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:suredel('确定要清空回收站？不可恢复！','');">
+                                    <span class="icon iconfont icon-shanchu"></span>清空回收站
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="tablelist"></div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+
+        var durl = "{:U('Content/pageajax')}";
+        $(window).load(function(){
+            ajaxContent();
+        });
+        //彻底删除
+        $(document).on('click','.contentdelete',function () {
+            var id = $(this).parent().parent().attr('data-id');
+            alertlayer({
+                ajaxurl:"{:U('Content/suredel')}",
+                content:"确定要删除？不可恢复！",
+                ids:id,
+                isremovetr:true
+            });
+        });
+        //恢复
+        $(document).on('click','.contentrecover',function () {
+            var id = $(this).parent().parent().attr('data-id');
+            alertlayer({
+                ajaxurl:"{:U('Content/recover')}",
+                content:"确定要恢复?",
+                ids:id,
+                isremovetr:true
+            });
+        });
+        //批量恢复
+        $("#act_con_recover").click(function(){
+            var ids = isCheck();
+            if(ids){
+                alertlayer({
+                    ajaxurl:"{:U('Content/recover')}",
+                    content:"确定要恢复?",
+                    ids:ids,
+                    isremovetr:true
+                });
+            }
+        });
+        //批量删除
+        $("#act_con_del").click(function(){
+            var ids = isCheck();
+            if(ids){
+                alertlayer({
+                    ajaxurl:"{:U('Content/suredel')}",
+                    content:"确定要删除？不可恢复！",
+                    ids:ids,
+                    isremovetr:true
+                });
+            }
+        });
+    </script>
+</block>

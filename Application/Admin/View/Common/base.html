@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <block name="title">
+    <title>我的建站系统</title>
+    </block>
+    <include file="Common/meta"/>
+    <block name="style"></block>
+</head>
+
+<body class="no-skin">
+<include file="Common/header"/>
+<!-- /section:basics/navbar.layout -->
+<div class="main-container" id="main-container">
+
+    <!-- #section:basics/sidebar -->
+    <include file="Common/left"/>
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <block name="body"></block>
+    </div><!-- /.main-content -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<include file="Common/footer"/>
+
+<block name="script"></block>
+</body>
+</html>

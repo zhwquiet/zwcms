@@ -1,0 +1,21 @@
+<notempty name="list">
+<volist name="list" id="v">
+<div class="comment">
+    <div class="text">
+        <div class="div">
+        	<div class="icon"></div>
+            <div class="base"><span>{$v.createtime|date='Y/m/d H:i:s',###}</span>{$v.username}</div>
+            <div class="content">{$v.content}</div>
+            <notempty name="v.reply">
+             <div class="reply">
+             <strong>回复：</strong>{$v.reply}
+             </div>
+            </notempty>    
+        </div>
+    </div>
+</div>
+</volist>
+<else/>
+没有评论
+</notempty>
+{$pages}

@@ -1,0 +1,183 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>内容列表</span></li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="nav_menu">
+                        <div class="search">
+                            <form id="searchForm" onsubmit="return false;">
+                                <input type="hidden" name="islock" value=""/>
+                                <input type="hidden" name="nature" value=""/>
+                                <input type="hidden" name="order" value=""/>
+                                <input type="hidden" name="cateid" value="{$cateid}"/>
+                                <input type="text" name="keyword" value="" placeholder="请输入关键字"/>
+                                <input type="button" class="btn btn-primary btn-round" onclick="javascript:ajaxContent(1);" value="查询">
+                            </form>
+                        </div>
+                        <ul>
+                            <notempty name="cateid">
+                                <li class="dropdown">
+                                    <a href="{:U('Content/add',array('cateid'=>$cateid))}">
+                                        <span class="icon iconfont icon-File"></span>发布内容</a>
+                                    <dl>
+                                        <dt><a href="{:U('Content/add',array('cateid'=>$cateid))}">发布内容</a></dt>
+                                        <dt><a href="{:U('Content/publishurl',array('cateid'=>$cateid))}">发布外链</a></dt>
+                                    </dl>
+                                </li>
+                                <li class="dropdown">
+                                    <a>
+                                        <span class="icon iconfont icon-iconplsd"></span>批量操作↓
+                                    </a>
+                                    <dl>
+                                        <dt><a class="select_set" data="move">批量转移</a></dt>
+                                        <dt><a class="select_set" data="delete">批量删除</a></dt>
+                                        <dt><a class="select_set" data="&islock=1">设置为已发</a></dt>
+                                        <dt><a class="select_set" data="&islock=0">设置为草稿</a></dt>
+                                        <dt><a class="select_set" data="&isnice=1">设置为推荐</a></dt>
+                                        <dt><a class="select_set" data="&isnice=0">取消推荐</a></dt>
+                                        <dt><a class="select_set" data="&ontop=1">设置为置顶</a></dt>
+                                        <dt><a class="select_set" data="&ontop=0">取消置顶</a></dt>
+                                        <dt><a class="select_set" data="&iscomment=1">允许评论</a></dt>
+                                        <dt><a class="select_set" data="&iscomment=0">禁止评论</a></dt>
+                                    </dl>
+                                </li>
+                            </notempty>
+                            <li class="dropdown" data-name="islock">
+                                <a>
+                                    <span class="icon iconfont icon-iconplsd"></span>
+                                    <label>按状态</label>↓
+                                </a>
+                                <dl>
+                                    <dt><a class="dl_select" data="">全部</a></dt>
+                                    <dt><a class="dl_select" data="1">已发</a></dt>
+                                    <dt><a class="dl_select" data="0">草稿</a></dt>
+                                </dl>
+                            </li>
+                            <li class="dropdown" data-name="nature">
+                                <a>
+                                    <span class="icon iconfont icon-iconplsd"></span>
+                                    <label>按性质</label>↓
+                                </a>
+                                <dl>
+                                    <dt><a class="dl_select" data="">全部</a></dt>
+                                    <dt><a class="dl_select" data="1">有缩放图</a></dt>
+                                    <dt><a class="dl_select" data="2">无缩放图</a></dt>
+                                    <dt><a class="dl_select" data="3">已推荐</a></dt>
+                                    <dt><a class="dl_select" data="4">未推荐</a></dt>
+                                    <dt><a class="dl_select" data="5">已置顶</a></dt>
+                                    <dt><a class="dl_select" data="6">未置顶</a></dt>
+                                    <dt><a class="dl_select" data="7">允许评论</a></dt>
+                                    <dt><a class="dl_select" data="8">禁止评论</a></dt>
+                                    <dt><a class="dl_select" data="9">外部链接</a></dt>
+                                </dl>
+                            </li>
+                            <li class="dropdown" data-name="order">
+                                <a>
+                                    <span class="icon iconfont icon-iconplsd"></span>
+                                    <label>按排序</label>↓
+                                </a>
+                                <dl>
+                                    <dt><a class="dl_select" data="">正常排序</a></dt>
+                                    <dt><a class="dl_select" data="1">访问人气↑</a></dt>
+                                    <dt><a class="dl_select" data="2">访问人气↓</a></dt>
+                                    <dt><a class="dl_select" data="3">发表日期↑</a></dt>
+                                    <dt><a class="dl_select" data="4">发表日期↓</a></dt>
+                                    <dt><a class="dl_select" data="5">评论数量↑</a></dt>
+                                    <dt><a class="dl_select" data="6">评论数量↓</a></dt>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="tablelist"></div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        var durl = "{:U('Content/pageajax')}";
+        isprevpage="{$Think.get.isprevpage}";
+        $(window).load(function(){
+            ajaxContent();
+        });
+        //批量操作
+        $(".select_set").click(function(){
+            var ids = isCheck();
+            var cateid = '{$cateid}';
+            if(ids){
+                var data = $(this).attr('data');
+                if(data == 'move'){
+                    var options = {
+                        type:1,
+                        cateid:cateid,
+                        title:'栏目移动',
+                        ajaxurl:"admin.php/Content/move/ids/"+ids,
+                        callback:function(){
+                            ajaxContent(1);
+                        }
+                    };
+                    moveItem(options);
+                }else if(data == 'delete'){
+                    var index=layer.open({
+                        content:'确定要删除？',
+                        btn:['确定','取消'],
+                        yes:function(){
+                            $.ajax({
+                                url:"{:U('Content/delete')}",
+                                data:{'ids':ids},
+                                dataType:"json",
+                                success:function(data){
+                                    var icon=2;
+                                    if(data.success){
+                                        icon=1;
+                                        ajaxContent(1);
+                                    }
+                                    layer.msg(data.msg, { icon: icon});
+                                },
+                                error:function(){}
+                            });
+                            layer.close(index);
+                        },
+                        cancel:function(){layer.close(index);}
+                    });
+                }else{
+                    $.ajax({
+                        url:"{:U('Content/batchset')}",
+                        data:'ids='+ids+data,
+                        type:'post',
+                        dataType:"json",
+                        success:function(data){
+                            var icon = 2;
+                            if(data.success){
+                                icon = 1;
+                            }
+                            layer.msg(data.msg, { icon: icon});
+                            ajaxContent();
+                        },
+                        error:function(){}
+                    });
+                }
+            }
+            $(this).parent().parent().hide();
+        });
+    </script>
+</block>

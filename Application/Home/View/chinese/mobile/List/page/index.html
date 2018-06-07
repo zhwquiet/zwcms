@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="Common/meta"/>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+
+<!-- 站内导航   -->
+<div id="position">
+ 	您所在的位置：<a href="index.php">首页</a>
+	{$classid|getpostion='>'}
+</div>
+
+<div id="container">
+	<div class="left">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$classname}
+		</div>
+		<div class="pc_body about">
+			<zxcms:rs table="model_page" field="content" where="cid = $classid" id="v">
+				{$v.content}
+			<zxcms:eof/></zxcms:rs>
+		</div>
+	</div>
+	
+	<div class="right">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$parentname}
+		</div>
+		<div class="pc_body p15">
+			<ul class="category">
+				<zxcms:rs table="category" field="id,catename" where="pid=$pid" order="ordnum,id" id="v">
+					<li <eq name="v.id" value="$classid">class="hover"</eq>>
+						<span>>></span>
+						<a href="{:U('List/index',array('classid'=>$v['id']))}" title="{$v.catename}">{$v.catename}</a>
+					</li>
+					<!-- 嵌套查询  -->
+					<eq name="v.id" value="$classid">
+						<zxcms:rs table="content" field="id,isurl,url,title,style,categoryid,createtime" where="categoryid = $classid and islock=1" order="ontop desc,id desc" id="v">
+							<li>
+								<a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq> {$v.style}>{$v.title}</a>
+							</li>
+							<zxcms:eof/>
+						</zxcms:rs> 
+					</eq>
+					
+				<zxcms:eof/>
+					<li>没有资料</li>
+				</zxcms:rs>
+			</ul>
+		</div>
+		<!-- 联系我们  区块调用 -->
+		<div class="pc_header mt10">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+		</div>
+		<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+
+	</div>
+</div>
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+
+</body>
+</html>

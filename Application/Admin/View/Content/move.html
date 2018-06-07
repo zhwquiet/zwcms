@@ -1,0 +1,21 @@
+<div class="table_form">
+    <form class="formname nice-validator n-yellow" method="post" novalidate="novalidate">
+        <div class="form_group">
+            <div class="form_txt">当前栏目：</div>
+            <div class="form_input">{$catename}</div>
+        </div>
+        <div class="form_group">
+            <div class="form_txt">目标栏目：</div>
+            <div class="form_input"><input type="hidden" name="t0" id="t0" value="0">
+                <ul id="treeDemo" class="ztree"></ul>
+            </div>
+        </div>
+    </form>
+</div>
+    <script>
+    $(function () {
+        $(document).ready(function () {
+        	setCheck({$list |default= ''});
+        });
+    });
+</script>

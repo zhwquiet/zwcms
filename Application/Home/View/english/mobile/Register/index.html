@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<include file="Common/meta"/>
+	<link href="__PUBLIC__/Home/pc/Css/register.css" rel="stylesheet" type="text/css"/>
+    <script src="__PUBLIC__/Home/Js/birthday.js"></script>
+    <script src="__PUBLIC__/Home/Js/reg.js"></script>
+</head>
+<body>
+    <h3>会员注册页面</h3>
+        <form class="regForm" method="post">
+            <div class="reg">
+            <div class="row">
+                <label for="regName" class="cell">用户名</label>
+                <input type="text" class="cell" name="regName" id="regName" maxlength="30" placeholder="至少包含一个字母或汉字"/>
+                <span class="must">*</span>
+            </div>
+            <div class="row">
+                <label for="regPenName" class="cell">昵称</label>
+                <input type="text" class="cell" name="regPenName" id="regPenName" maxlength="30" />
+            </div>
+            <div class="row">
+                <label for="regPwd" class="cell">密码</label>
+                <input type="password" class="cell" id="regPwd" name="regPwd" maxlength="11"/>
+                <span class="must">*</span>
+            </div>
+            <div class="row">
+                <label for="reRegPwd" class="cell">确认密码</label>
+                <input type="password" class="cell" id="reRegPwd" name="reRegPwd" maxlength="11"/>
+                <span class="must">*</span>
+            </div>
+            <div class="row">
+                <label for="regMail" class="cell">邮箱地址</label>
+                <input type="email" class="cell" id="regMail" name="regMail" maxlength="30"/>
+            </div>
+            <div class="row">
+                <label for="regMail" class="cell">性别</label>
+                <input type="radio" class="radio" name="regSex" id="man" checked value="0"/><label for="man" class="cell">男</label>
+                <input type="radio" class="radio" name="regSex" id="wom" value="1"/><label for="wom" class="cell">女</label>
+                <input type="radio" class="radio" name="regSex" value="-1"/><label for="wom" class="cell">保密</label>
+            </div>
+            <div class="row">
+                <label class="cell">出生日期</label>
+                <select id="regYear" name="regYear"></select>年
+                <select id="regMon" name="regMon"></select>月
+                <select id="regDay" name="regDay"></select>日
+            </div>
+            <div class="row">
+                <label class="cell">所在地区</label>
+                <select name="prov" id="prov"></select>
+                <select name="city" id="city"></select>
+                <select name="dist" id="dist"></select>
+            </div>
+            <div class="row">
+                <label for="regTel" class="cell">手机号码</label>
+                <input type="tel" class="cell" id="regTel" name="regTel" maxlength="11"/>
+            </div>
+            <div class="row">
+                <label for="verify" class="cell">验证码</label>
+                <input type="text" class="cell" id="verify" name="verify" maxlength="4"/><span class="must">*</span>
+                <img width="80px;" id="verifycode" src="/code_verify.html" onclick="this.src+='&'+Math.random()"/>
+            </div>
+            <div class="row">
+                <input type="submit" class="btnSubmit" value="注册">
+            </div>
+            </div>
+        </form>
+</body>
+<script>
+    $('.regForm').validator({
+        stopOnError:true,
+        theme:'yellow_top',
+        ignore:':hidden',
+        beforeSubmit:function(){
+            $("input[type='submit']").attr('disabled',true)
+        },
+        valid:function(){
+            $.ajax({
+                url:"{:U('Register/add')}",
+                type:'post',
+                data:$('.regForm').serialize(),
+                dataType:"json",
+                success:function(info){
+                    if(info.success){
+                        layer.msg(info.msg, { icon: 1 });
+                        setInterval(function(){
+                            location.href="{:U('Index/index')}";
+                        },1500);
+                    }else{
+                    	$("#verifycode").click();
+                        layer.msg(info.msg, { icon: 2 });
+                        $("input[type='submit']").attr('disabled',false);
+                    }
+                },
+                error:function(){
+                    $("input[type='submit']").attr('disabled',false)}
+            });
+        },
+        invalid:function(){$("input[type='submit']").attr('disabled',false)},
+        fields:{
+            'regName':'[required]',
+            'regPwd':'[required];length[6~11]',
+            'reRegPwd':'[required];length[6~11];match[regPwd]',
+            'regTel':'mobile',
+            'verify':'required',
+            'regMail':'email'
+        },
+        messages: {
+            match: {
+                eq: "两次密码不一致"
+            },
+            length:{
+                rg:"密码{1}到{2}位"
+            }
+        }
+    });
+</script>
+</html>

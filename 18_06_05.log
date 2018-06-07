@@ -1,0 +1,475 @@
+[ 2018-06-05T15:43:07+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000421s ]
+
+[ 2018-06-05T15:43:07+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002512s ]
+
+[ 2018-06-05T15:43:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000458s ]
+
+[ 2018-06-05T15:43:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000073s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001551s ]
+
+[ 2018-06-05T15:43:39+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000436s ]
+
+[ 2018-06-05T15:43:39+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000500s ]
+
+[ 2018-06-05T15:45:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000683s ]
+
+[ 2018-06-05T15:45:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000456s ]
+
+[ 2018-06-05T15:48:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000398s ]
+
+[ 2018-06-05T15:48:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000059s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000731s ]
+
+[ 2018-06-05T15:48:31+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000507s ]
+
+[ 2018-06-05T15:48:31+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000332s ]
+
+[ 2018-06-05T15:50:04+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000053s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000476s ]
+
+[ 2018-06-05T15:50:04+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000069s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004326s ]
+
+[ 2018-06-05T15:52:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000477s ]
+
+[ 2018-06-05T15:52:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000751s ]
+
+[ 2018-06-05T15:53:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000596s ]
+
+[ 2018-06-05T15:53:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000057s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000836s ]
+
+[ 2018-06-05T15:53:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001097s ]
+
+[ 2018-06-05T15:53:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000375s ]
+
+[ 2018-06-05T16:58:46+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000626s ]
+
+[ 2018-06-05T16:58:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000645s ]
+
+[ 2018-06-05T16:58:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000428s ]
+
+[ 2018-06-05T16:58:46+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000051s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000618s ]
+
+[ 2018-06-05T16:58:46+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002288s ]
+
+[ 2018-06-05T17:02:21+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000413s ]
+
+[ 2018-06-05T17:02:22+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000434s ]
+
+[ 2018-06-05T17:02:22+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000444s ]
+
+[ 2018-06-05T17:02:22+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000651s ]
+
+[ 2018-06-05T17:02:22+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000062s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000768s ]
+
+[ 2018-06-05T17:04:31+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000313s ]
+
+[ 2018-06-05T17:04:31+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000387s ]
+
+[ 2018-06-05T17:04:31+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000120s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003545s ]
+
+[ 2018-06-05T17:04:31+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000484s ]
+
+[ 2018-06-05T17:04:31+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000056s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000743s ]
+
+[ 2018-06-05T17:06:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000428s ]
+
+[ 2018-06-05T17:06:40+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000372s ]
+
+[ 2018-06-05T17:06:40+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000412s ]
+
+[ 2018-06-05T17:06:40+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000410s ]
+
+[ 2018-06-05T17:06:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000437s ]
+
+[ 2018-06-05T17:09:18+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000468s ]
+
+[ 2018-06-05T17:09:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000425s ]
+
+[ 2018-06-05T17:09:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000403s ]
+
+[ 2018-06-05T17:09:18+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000376s ]
+
+[ 2018-06-05T17:09:18+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000377s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002858s ]
+
+[ 2018-06-05T17:11:33+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000058s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000747s ]
+
+[ 2018-06-05T17:11:33+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000431s ]
+
+[ 2018-06-05T17:11:34+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000456s ]
+
+[ 2018-06-05T17:11:34+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000058s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000681s ]
+
+[ 2018-06-05T17:11:34+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000056s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000596s ]
+
+[ 2018-06-05T17:12:29+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000425s ]
+
+[ 2018-06-05T17:12:29+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000060s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000729s ]
+
+[ 2018-06-05T17:12:29+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000078s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000652s ]
+
+[ 2018-06-05T17:12:29+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000057s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004911s ]
+
+[ 2018-06-05T17:12:29+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000038s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001113s ]
+
+[ 2018-06-05T17:13:48+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000417s ]
+
+[ 2018-06-05T17:13:48+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000650s ]
+
+[ 2018-06-05T17:13:48+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000432s ]
+
+[ 2018-06-05T17:13:48+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000492s ]
+
+[ 2018-06-05T17:13:49+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000767s ]
+
+[ 2018-06-05T17:14:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000059s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000520s ]
+
+[ 2018-06-05T17:14:40+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000078s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001071s ]
+
+[ 2018-06-05T17:14:40+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000417s ]
+
+[ 2018-06-05T17:14:40+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000476s ]
+
+[ 2018-06-05T17:14:40+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000570s ]
+
+[ 2018-06-05T17:14:54+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000305s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002889s ]
+
+[ 2018-06-05T17:14:54+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000583s ]
+
+[ 2018-06-05T17:14:54+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000449s ]
+
+[ 2018-06-05T17:14:54+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000439s ]
+
+[ 2018-06-05T17:14:54+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000519s ]
+
+[ 2018-06-05T17:15:54+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000456s ]
+
+[ 2018-06-05T17:15:54+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000401s ]
+
+[ 2018-06-05T17:15:54+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000719s ]
+
+[ 2018-06-05T17:15:54+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000737s ]
+
+[ 2018-06-05T17:15:54+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000469s ]
+
+[ 2018-06-05T17:23:38+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000528s ]
+
+[ 2018-06-05T17:23:38+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000057s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000808s ]
+
+[ 2018-06-05T17:23:38+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000088s ]
+INFO: [ app_init ] --END-- [ RunTime:0.009583s ]
+
+[ 2018-06-05T17:23:38+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000090s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000811s ]
+
+[ 2018-06-05T17:23:38+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000081s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004109s ]
+
+[ 2018-06-05T17:25:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000052s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000625s ]
+
+[ 2018-06-05T17:25:18+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000440s ]
+
+[ 2018-06-05T17:25:18+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000045s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005030s ]
+
+[ 2018-06-05T17:25:18+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000740s ]
+
+[ 2018-06-05T17:25:18+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000061s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001447s ]
+
+[ 2018-06-05T17:35:46+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000623s ]
+
+[ 2018-06-05T17:35:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000452s ]
+
+[ 2018-06-05T17:35:46+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000588s ]
+
+[ 2018-06-05T17:35:46+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000477s ]
+
+[ 2018-06-05T17:35:46+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000071s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000884s ]
+
+[ 2018-06-05T17:36:01+08:00 ] 127.0.0.1 /upfile/2017/02/1486539279419.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000444s ]
+
+[ 2018-06-05T17:36:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715593960.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000386s ]
+
+[ 2018-06-05T17:36:01+08:00 ] 127.0.0.1 /upfile/2017/01/14849003357.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000071s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000453s ]
+
+[ 2018-06-05T17:36:01+08:00 ] 127.0.0.1 /upfile/2017/01/14849010304.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000487s ]
+
+[ 2018-06-05T17:36:01+08:00 ] 127.0.0.1 /upfile/2017/03/1489715514699.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000509s ]
+

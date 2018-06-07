@@ -1,0 +1,46 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>会员列表</span></li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="tablelist"></div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        $(function(){
+            $('#tablelist').on('mouseover','tr',function(){
+                $(this).css('background','#EBF4FC');
+            });
+            $('#tablelist').on('mouseout','tr',function(){
+                $(this).css('background','#FFF');
+            });
+        });
+
+        var durl = "{:U('Member/pageAjax')}";
+        $(window).load(function(){
+            ajaxContent();
+        });
+    </script>
+</block>

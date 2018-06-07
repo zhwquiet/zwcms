@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="Common/meta"/>
+    <link href="__PUBLIC__/Home/pc/Css/book.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/Home/Js/book.js"></script>
+    <script>
+    var pageCount = 10;//留言每页显示条数
+    </script>
+</head>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+
+<div id="container">
+      <div class="left">
+         <!--left begin-->
+          <div class="pc_header">
+          	<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />留言信息
+          </div>
+          <div class="pc_body" id="book_list"></div>
+          <div class="pc_header mt10">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />发表留言
+          </div>
+          <div class="pc_body newslist">
+               <form class="form_book" method="post">
+                    <div class="bookadd">
+                        <div class="label">昵称：<span>*</span></div>
+                        <div class="enter"><input type="text" name="username" id="nicekname" maxlength="20" data-rule="昵称:required;" class="ip" /></div>
+                        <div class="label">留言内容：<span>*</span></div>
+                        <div class="enter"><textarea name="content" cols="55" rows="4" data-rule="留言内容:required;" class="ip" onKeyUp="strlen_verify(this,'booklen',255)" /></textarea><label>还可以输入<span id="booklen">255</span>个字符</label></div>
+                        <div class="label">联系电话：<span>*</span></div>
+                        <div class="enter"><input type="text" name="tel" maxlength="20" data-rule="联系电话:required;mobile|tel" class="ip" />　可以填写电话或手机，电话请加区号</div>
+                        <div class="label">性别：</div>
+                        <div class="enter"><select name="sex" id="sex"><option value="0">保密</option><option value="1">男</option><option value="2">女</option></select></div>
+                        <div class="label">验证码：<span>*</span></div>
+                        <div class="enter"><input type="text" name="verify" size="4" maxlength="4" data-rule="验证码:required;" class="ip" />
+                        <img src="/code_verify.html" style="width:100px;" title="看不清楚？点击刷新！" align="absmiddle" id="imgcode" onClick="this.src+='&'+Math.random();" />
+                        </div>
+                        <div class="label"></div>
+                        <div class="enter"><input type="submit" value="提交" class="bnt" /> <input type="reset" value="重设" class="bnt" /></div>
+                    </div>
+                    </form>
+          </div>
+      </div> 
+      <!--left over-->
+      
+      <div class="right">
+          <div class="pc_header">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />随机推荐
+          </div>
+          <div class="pc_body p15">
+              <ul class="topnews">
+                    <zxcms:rs field="a.id,a.title,a.style,a.createtime,a.isurl,a.url,a.categoryid" table="content a" join="left join zx_category b on a.categoryid=b.id" where="a.islock=1 and b.modelid gt 0" limit="10">
+                    <li><a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq> {$v.style}>{$v.title}</a></li>
+                    <zxcms:eof/>
+                    <li>没有资料</li>
+                    </zxcms:rs>
+              </ul>
+          </div>
+          <!-- 联系我们  区块调用 -->
+			<div class="pc_header mt10">
+				<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+			</div>
+			<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+      
+      </div>
+</div>
+
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+</html>

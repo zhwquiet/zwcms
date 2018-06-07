@@ -1,0 +1,173 @@
+#master,#master_add{
+    overflow: hidden;
+}
+#master .list-loop {
+    float: left;
+    margin: 0 15px 15px 0;
+    border: 1px solid #eee;
+    border-bottom: 0;
+    width: 297px;
+    border-radius: 0px;
+    position: relative;
+}
+#master .list-loop .info {
+    padding: 10px 15px;
+    color: #444;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+}
+#master .list-loop .info a {
+    float: right;
+    color: #999;
+}
+#master .list-loop .info a:hover{color:#f30;}
+#master .list-loop .hover {
+    width: 100%;
+    height: 162.5px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+#master .list-loop .hover .img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#master .list-loop .hover img{
+    max-width: 100%;
+}
+#master .list-loop .hover a {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    background: #000;
+    height: 30px;
+    width: 265px;
+    color: #fff;
+    opacity: 0.7;
+    text-align: left;
+    text-indent: 14px;
+}
+#master .list-loop .item {
+    overflow: hidden;
+    clear: both;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+#master .list-loop .item img {
+    float: right;
+    margin-left: 10px;
+    width: 70px;
+    height: 70px;
+}
+#master .list-loop .item a {
+    font-size: 14px;
+}
+
+#master .list-loop .admin {
+    padding: 0;
+    overflow: hidden;
+}
+#master .list-loop .admin ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#master .list-loop .admin ul li {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+#master .list-loop .admin ul li a {
+    display: block;
+    background: #fafafa;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+#master .list-loop .admin ul li:last-child a {
+    border-left: 1px solid #eee;
+}
+#master .list-loop .add{position:absolute;top:0;width:100%;height:100%;background:#999;opacity:0.9;display:none;cursor:pointer;}
+#master .list-loop:hover .add{display:block;}
+#master .bg .add{background:#999 url(../images/bg_master.png) no-repeat center;display:block;}
+
+#master_add .left{float:left;width:322px;}
+#master_add .right{margin-left:350px;overflow:hidden;}
+#master_add .right .table_form{background:#F4F5F9;padding:15px 10px;border:1px solid #E7E7EB;position:relative;margin:15px;}
+#arraw-left{width:0;height:0;border-width:15px 15px 15px 0;border-style:solid;border-color:transparent #E7E7EB transparent transparent;position:absolute;left:-15px;margin-top:30px;}
+#arraw-left span{width:0;height:0;border-width:14px 14px 14px 0;border-style:solid;border-color:transparent #F4F5F9 transparent transparent;position:absolute;top:-14px;left:1px}
+
+#left_master{border:1px solid #E7E7EB;width:320px;}
+#left_master .header{background:#ececec;height:160px;position:relative;margin: 0;padding: 0;border: 0;}
+#left_master .header .img{display:block;width:320px;height:160px;line-height:140px;font-size:14px;color:#999;overflow: hidden;}
+#left_master .header .img img{max-width:100%;border:0px;margin-left:-2px;}
+#left_master .header a{position:absolute;background:#000;line-height:30px;bottom:0;left:0;width:100%;text-indent:12px;color:#fff;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#left_master .header a span{padding:6px 15px;background:#999;color:#fff;border-radius:10px;}
+#left_master .header .hover{position:absolute;height:160px;left:0;bottom:0;background:#f1f1f1;text-align:center;width:100%;opacity:0.9;line-height:160px;display:none;}
+#left_master .header .hover a{position:static;background:none;color:#555;}
+#left_master .header .hover a:hover{color:#f30;}
+#left_master .header:hover .hover{display:block;}
+#left_master .header:hover .hover a:hover span{background:#F30;}
+#left_master .item{border-bottom:1px solid #E7E7EB;padding:15px 10px;overflow:hidden;clear:both;position:relative;}
+#left_master .item .img{float:right;margin-left:10px;width:70px;height:70px;line-height:70px;text-align:center;background:#f3f3f3;color:#888;}
+#left_master .item .img img{width:70px;height:70px;}
+#left_master .item a{font-size:14px;}
+#left_master .item a span{padding:6px 15px;background:#aaa;color:#fff;border-radius:10px;}
+#left_master .item .hover{position:absolute;height:100px;left:0;bottom:0;background:#f1f1f1;text-align:center;width:100%;opacity:0.9;line-height:100px;display:none;}
+#left_master .item:hover .hover{display:block;}
+#left_master .item:hover .hover a:hover span{background:#F30;}
+#left_master .active{background:#fafafa;}
+#left_master .top a{background:#f30;}
+
+#left_master .more{text-align:center;overflow:hidden;}
+#left_master .more a{display:block;line-height:60px;width:100%;font-size:32px;color:#999;float:left;width:50%;border-right:1px solid #E7E7EB}
+#left_master .more a:hover{color:#555;background:#fafafa;}
+#left_master .more a:last-child{border:0;}
+
+.news-choose-table tbody tr:hover{
+    cursor: pointer;
+}
+.news-choose-table tbody tr.am-active td{
+    background-color: #ffd;
+}
+.am-text-danger{
+    color: #dd514c;
+    padding-left: 1.6rem;
+}
+
+.master_box{
+    height: 300px;
+    width: 350px;
+    overflow: auto;
+    padding: 15px;
+    margin: 10px 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+}
+.master_box .list-loop{margin:0 15px 15px 0;border:1px solid #eee;border-bottom:0;width:297px;border-radius:0px;}
+.master_box .list-loop .info{padding:10px 15px;color:#444;background:#fafafa;border-bottom:1px solid #eee;}
+.master_box .list-loop .info a{float:right;color:#999;}
+.master_box .list-loop .info a:hover{color:#f30;}
+.master_box .list-loop .hover{
+    width: 100%;
+    height: 162.5px;
+    padding: 15px;
+    overflow: hidden;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.master_box .list-loop .hover .img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.master_box .list-loop .hover img{
+    max-width: 100%;
+}
+.master_box .list-loop .hover a{position:absolute;bottom:15px;background:#000;height:30px;width:265px;left:15px;color:#fff;opacity:0.7;text-align:center;}
+.master_box .list-loop .hover a:hover{text-decoration:underline;}
+.master_box .list-loop .item{overflow:hidden;clear:both;padding:10px 15px;border-bottom:1px solid #eee;}
+.master_box .list-loop .item img{float:right;margin-left:10px;width:70px;height:70px;}
+.master_box .list-loop .item a{font-size:14px;}

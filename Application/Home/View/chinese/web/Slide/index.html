@@ -1,0 +1,15 @@
+<div id="banner">
+    <div id="switchable3" class="eui_switchable">
+        <div class="sc_container">
+            <ul>
+                <volist name="list" id="v">
+                    <li>
+                        <a href="{$v.url}" <eq name="v.mode" value="2">target="_blank"</eq>>
+                            <img src="{$v.picid|getattachurl}" alt="{$v.title}" width="960" height="268" border="0" />
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>

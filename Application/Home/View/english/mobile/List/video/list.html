@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="Common/meta"/>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+<!-- 站内导航   -->
+<div id="position">
+ 	您所在的位置：<a href="index.php">首页</a>
+	{$classid|getpostion='>'}
+</div>
+<div id="container">
+	<div class="left">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$classname}
+		</div>
+          <div class="pc_body">
+              <div class="piclist">
+              <ul>
+                <zxcms:rs table="content" field="id,isurl,url,title,style,categoryid,createtime" where="categoryid in($sonid) and islock=1" order="ontop desc,id desc" page="true" limit="$pagenum" id="v">
+					<li>
+						<a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq>>
+						<img src="{$v.picid|getattachurl}" title="{$v.title}" alt="{$v.title}" width="150" height="150" />
+						<div>{$v.title}</div>
+					</a>
+					</li>
+					<zxcms:eof/>
+					<li><a href="{$Think.const.WEBURL}" target="_blank"><img src="__PUBLIC__/Home/Images/nopic.jpg" /><div>没有资料</div></a></li>
+				</zxcms:rs>  
+              </ul>
+              </div>
+			{$pages}
+          </div>
+      </div>
+	<div class="right">
+		<div class="pc_header">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />{$parentname}
+		</div>
+		<div class="pc_body p15">
+			<ul class="category">
+				<zxcms:rs table="category" field="id,catename" where="pid=$classid" order="ordnum,id" id="v">
+					<li <eq name="v.id" value="$classid">class="hover"</eq>>
+						<span>>></span>
+						<a href="{:U('List/index',array('classid'=>$v['id']))}" title="{$v.catename}">{$v.catename}</a>
+					</li>
+				<zxcms:eof/>
+					<eq name="pid" value="0">
+					<li class="hover">
+					<span>>></span>
+					<a href="{:U('List/index',array('classid'=>$classid))}">{$classname}</a></li>
+					<else/><li>没有资料</li>
+					</eq>
+				</zxcms:rs>
+			</ul>
+		</div>
+		<!-- 联系我们  区块调用 -->
+		<div class="pc_header mt10">
+			<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+		</div>
+		<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+
+	</div>
+</div>
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+</body>
+</html>

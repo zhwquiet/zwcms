@@ -1,0 +1,208 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>友情链接</span></li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="nav_menu">
+                        <div class="search clear" style="width:200px;">
+                            <form id="searchForm" onsubmit="return false;">
+                                <input type="hidden" name="nature" value=""/>
+                                <select name="navCate" id="navCate" class="beautify_input">
+                                    <option value="">按类别管理</option>
+                                    <option value="0">未分类</option>
+                                    <volist name="linkclass" id="volinkclass">
+                                        <option value="{$volinkclass.classid}"> {$volinkclass.classname}</option>
+                                    </volist>
+                                </select>
+                            </form>
+                        </div>
+                        <ul>
+                            <li><a href="{:U('Expand/linkAdd')}"><span class="icon iconfont icon-liebiaoshouqi"></span>添加链接</a></li>
+                            <li class="dropdown">
+                                <a href="javascript:;"><span class="icon iconfont icon-iconplsd"></span>批量操作↓</a>
+                                <dl>
+                                    <dt><a href="javascript:;" class="nolock">通过审核</a></dt>
+                                    <dt><a href="javascript:;" class="islock">取消审核</a></dt>
+                                    <dt><a href="javascript:;" class="delsome">批量删除</a></dt>
+                                </dl>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:;"><span class="icon iconfont icon-move"></span>移动链接↓</a>
+                                <dl>
+                                    <dt><a href="javascript:;" class="move">批量移动</a></dt>
+                                    <dt><a href="javascript:;" class="movecate">按类别移动</a></dt>
+                                </dl>
+                            </li>
+                            <li class="dropdown" data-name="nature">
+                                <a>
+                                    <span class="icon iconfont icon-iconplsd"></span>
+                                    <label>按性质</label>↓
+                                </a>
+                                <dl>
+                                    <dt><a class="dl_select" data="">全部</a></dt>
+                                    <dt><a class="dl_select" data="1">未审</a></dt>
+                                    <dt><a class="dl_select" data="2">已审</a></dt>
+                                    <dt><a class="dl_select" data="3">文字链接</a></dt>
+                                    <dt><a class="dl_select" data="4">图片链接</a></dt>
+                                </dl>
+                            </li>
+                            <li><a href="{:U('Expand/linkClass')}"><span class="icon iconfont icon-leimupinleifenleileibie"></span>链接类别管理</a></li>
+                        </ul>
+                    </div>
+                    <div id="tablelist"></div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        $(function(){
+            //批量删除
+            $(".delsome").click(function(){
+                var ids=isCheck();
+                if(ids){
+                    alertlayer({
+                        ajaxurl:"{:U('Expand/delSome')}",
+                        content:"确定要删除？不可恢复！",
+                        ids:ids,
+                        isremovetr:true
+                    });
+                }
+            });
+            //批量移动
+            $(".move").click(function(){
+                var idarr = isCheck();
+                if(idarr){
+                    var html="";
+                    html+='<dl class="move">';
+                    html+='  <dt><b>目标类别：</b><select name="go" id="go">';
+                    html+='<option value="0">不设置类别</option>';
+                    html+='<volist name="linkclass" id="volinkclass"><option value="{$volinkclass.classid}">{$volinkclass.classname}</option></volist>';
+                    html+='</select></dt>';
+                    html+='</dl>';
+                    var index=layer.open({
+                        title:'批量移动',
+                        content:html,
+                        btn:['确定','取消'],
+                        yes:function(){
+                            var selClass=$("#go")[0].value;
+                            if(selClass==""){
+                                layer.msg("不能移动到当前栏目", { icon: 2 });
+                                return false;
+                            }
+                            $.ajax({
+                                url:"{:U('Expand/linkMove')}",
+                                type:'get',
+                                data:{"selClass":selClass,"selId":idarr},
+                                dataType:"json",
+                                success:function(info){
+                                    if(info.success){
+                                        layer.msg(info.msg, { icon: 1 });
+                                        ajaxContent(1);
+                                    }else{
+                                        layer.msg(info.msg, { icon: 2 });
+                                    }
+                                },
+                                error:function(){}
+                            });
+                            layer.close(index);
+                        },
+                        cancel:function(){
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+            //按类别移动
+            $(".movecate").click(function(){
+                var html="";
+                html+='<dl class="movecate">';
+                html+='<dt><b>来源类别：</b><select name="comecate" id="comecate"><option value="0">不设置类别</option><volist name="linkclass" id="voclass"><option value="{$voclass.classid}">{$voclass.classname}</option></volist></select><div>两者不能一致</div></dt>';
+                html+='<dt><b>目标类别：</b><select name="gocate" id="gocate"><option value="0">不设置类别</option><volist name="linkclass" id="vovoclass"><option value="{$vovoclass.classid}">{$vovoclass.classname}</option></volist></select></dt>';
+                html+='</dl>';
+                var ind=layer.open({
+                    title:'按类别移动',
+                    btn:['确定','取消'],
+                    content:html,
+                    yes:function(){
+                        $.ajax({
+                            url:"{:U('Expand/cateMove')}",
+                            type:'post',
+                            data:{"comecate":$("#comecate").val(),"gocate":$("#gocate").val()},
+                            dataType:"json",
+                            success:function(info){
+                                if(info.success){
+                                    layer.msg(info.msg, { icon: 1 });
+                                    ajaxContent(1);
+                                }else{
+                                    layer.msg(info.msg, { icon: 2 });
+                                }
+                            },
+                            error:function(){}
+                        });
+                        layer.close(ind);
+                    },
+                    cancel:function(){
+                        layer.close(ind);
+                    }
+                });
+            });
+            $(".islock").click(function(){doset("islock");});
+            $(".nolock").click(function(){doset("nolock");});
+
+            $('#navCate').change(function(){
+                ajaxContent(1);
+            });
+
+        });
+        function doset(act){
+            var idarr = isCheck();
+            if(idarr){
+                $.ajax({
+                    type:"get",
+                    data:{"linkId":idarr,"act":act},
+                    url:"{:U('Expand/linkLock')}",
+                    dataType:"json",
+                    success:function(info){
+                        if(info.success){
+                            layer.msg(info.msg, { icon: 1 });
+                            ajaxContent(1);
+                        }else{
+                            layer.msg(info.msg, { icon: 2 });
+                        }
+                    }
+                });
+            }
+        }
+
+        var durl = "{:U('Expand/pageAjax')}";
+        isprevpage="{$Think.get.isprevpage}";
+        var pageMethod = 'link';
+        $(window).load(function(){
+            ajaxContent();
+        });
+    </script>
+</block>
+
+
+
+

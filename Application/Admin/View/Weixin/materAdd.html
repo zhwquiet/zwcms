@@ -1,0 +1,208 @@
+<extend name="Common/base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/weixin.css">
+</block>
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>素材管理</span></li>
+        </ul><!-- /.breadcrumb -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="master_add" style="">
+                        <div class="left">
+                            <div id="left_master">
+                                <volist name="newlist" id="v">
+                                    <eq name="key" value="0">
+                                        <div class="header top">
+                                            <div class="img frist_pic_{$v.id}"><img src="{$v.pic_id|getattachurl}"></div>
+                                            <a href="" class="frist_title_{$v.id}">{$v.title}</a>
+                                            <div class="hover">
+                                                <if condition="count($newlist) gt 1">
+                                                <a href="javascript:;" class="mater-down" data-id="{$v.id}"><span>下移</span></a>
+                                                </if>
+                                                <a href="javascript:getnewsinfo({$v.id});"><span>编辑</span></a>
+                                            </div>
+                                        </div>
+                                    <else/>
+                                        <a name="last_{$v.id}"></a>
+                                        <div class="item">
+                                            <div class="img frist_pic_{$v.id}"><img src="{$v.pic_id|getattachurl}"></div>
+                                            <a href="" class="frist_title_{$v.id}">{$v.title}</a>
+                                            <div class="hover">
+                                                <a href="javascript:;" class="mater-up" data-id="{$v.id}"><span>上移</span></a>
+                                                <if condition="$key neq (count($newlist)-1)">
+                                                    <a href="javascript:;" class="mater-down" data-id="{$v.id}"><span>下移</span></a>
+                                                </if>
+                                                <a href="javascript:getnewsinfo({$v.id});"><span>编辑</span></a>
+                                                <a href="javascript:;" class="del" data-id="{$v.id}"><span>删除</span></a>
+                                            </div>
+                                        </div>
+                                    </eq>
+                                </volist>
+                                <div class="more"><a href="javascript:getnewsinfo();" class="addone" title="新增一条">+</a><a href="javascript:;" class="choose" title="选择内容">□</a></div>
+
+                            </div>
+                        </div>
+                        <div class="right" style="">
+
+                        </div>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        var id = '{$newlist[0][id]}';
+        getnewsinfo(id);
+        function getnewsinfo(id='') {
+            $.ajax({
+                url:"{:U('Weixin/newsAdd')}",
+                data:"id="+id+"&mater_id="+'{$Think.get.id}',
+                type:"GET",
+                success:function (data) {
+                    if(data.error){
+                        layer.msg(data.msg, { icon: 2 });
+                    }else{
+                        $(".right").html(data);
+                    }
+
+                }
+            });
+        }
+        /**
+         * 删除文章
+         */
+        $(".del").click(function () {
+            var div = $(this).parents(".item");
+            var id= $(this).attr('data-id');
+            var index=layer.open({
+                content:'确定要删除？',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url:"{:U('Weixin/materNewsDel')}",
+                        data:{id:id,mater_id:'{$Think.get.id}'},
+                        type:"POST",
+                        dataType:"json",
+                        success:function(data){
+                            if(data.success){
+                                layer.msg(data.msg, { icon: 1 });
+                                div.remove();
+                            }else{
+                                layer.msg(data.msg, { icon: 2 });
+                            }
+                        },
+                        error:function(){}
+                    });
+                    layer.close(index);
+                },
+                cancel:function(){layer.close(index);}
+            });
+        });
+        /**
+         * 上移
+         */
+        $(".mater-up").click(function () {
+            layer.load();
+            var id= $(this).attr('data-id');
+            $.post("{:U('Weixin/materNewsMove')}",{id:id,mater_id:'{$Think.get.id}',type:'up'},function (data) {
+                if(data.success){
+                    layer.msg(data.msg, { icon: 1 });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1500);
+                }else{
+                    layer.msg(data.msg, { icon: 2 });
+                }
+            });
+        });
+
+        /**
+         * 下移
+         */
+        $(".mater-down").click(function () {
+            layer.load();
+            var id= $(this).attr('data-id');
+            $.post("{:U('Weixin/materNewsMove')}",{id:id,mater_id:'{$Think.get.id}',type:'down'},function (data) {
+                if(data.success){
+                    layer.msg(data.msg, { icon: 1 });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1500);
+                }else{
+                    layer.msg(data.msg, { icon: 2 });
+                }
+            });
+        });
+
+
+
+        /**
+         * 选择内容
+         */
+        $(".choose").click(function () {
+            var mater_id = '{$Think.get.id}';
+            $.get("{:U('Weixin/newslayer')}",{mater_id:mater_id},function(data){
+                if(data.error){
+                    layer.msg(data.msg, { icon: 2 });
+                }else{
+                    var index=layer.open({
+                        type: 1,
+                        area:['800px','550px'],
+                        title: '内容选择',
+                        closeBtn: 1,
+                        shadeClose: false,
+                        skin: 'layui-layer-auto',
+                        content: data,
+                        btn:['确定','取消'],
+                        yes:function(index, layero){
+                            var news_id = $(layero).find(".news-choose-table .am-active").attr('data-id');
+                            $.post("{:U('Weixin/newslayer')}",{news_id:news_id,mater_id:mater_id},function (data) {
+                                if(data.success){
+                                    layer.msg(data.msg, { icon: 1 });
+                                    setTimeout(function() {
+                                        layer.close(index);
+                                        if(data.id){
+                                            window.location.href = "/admin.php/Weixin/materAdd/id/"+data.id;
+                                        }else{
+                                            window.location.reload();
+                                        }
+                                    }, 1500);
+                                }else{
+                                    layer.msg(data.msg, { icon: 2 });
+                                }
+                            });
+                        },
+                        cancel:function(){
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+        });
+        $(document).on('click','.news-choose-table tbody tr',function () {
+            $(this).siblings().removeClass('am-active');
+            $(this).addClass('am-active');
+        });
+
+    </script>
+</block>
+
+
+
+

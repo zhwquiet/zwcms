@@ -1,0 +1,108 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Expand/link',array('isprevpage'=>1))}">友情链接</a></li>
+            <li>
+                <notempty name="link">
+                    编辑<else/>添加
+                </notempty>
+            </li>
+        </ul><!-- /.breadcrumb -->
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal linkAddForm" method="post">
+                            <input type="hidden" name="id" value="{$link.id}" />
+                            <div class="form_group">
+                                <div class="form_txt">网站名称：</div>
+                                <div class="form_input">
+                                    <input type="text" name="webname" size="50" maxlength="50" class="ip" value="{$link.webname}" data-rule="网站名称:required;webName;" />
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">网站域名：</div>
+                                <div class="form_input">
+                                    <input type="text" name="weburl" size="50" maxlength="255" class="ip" value="{$link.weburl}" data-rule="网站域名:required;url" />
+                                    <span>请以http://或https://开头</span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">网站LOGO：</div>
+                                <div class="form_input">
+                                    <input type="text" size="50" maxlength="255" class="ip" value="{$link.weblogoid|getattachurl}" disabled/>
+                                    <input type="hidden" name="catepicid" value="{$link.weblogoid}"/>
+                                    <input type="button" value="上传" id="upbtn" data-type="1" class="bnt bnt_save" />
+                                    <span>可以为空</span>
+                                </div>
+                                <div class="form_input img-div" <empty name="link.weblogoid">style="display:none;"</empty>>
+                                    <img src="{$link.weblogoid|getattachurl}"/>
+                                    <i class="iconfont icon-close img-del"></i>
+                                </div>
+
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">类别选择：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="classid" class="ip beautify_input">
+                                        <option value="0">不设置类别</option>
+                                        <volist name="linkclass" id="volinkclass">
+                                            <option value="{$volinkclass.classid}" <eq name="volinkclass.classid" value="$link['classid']">selected</eq>>{$volinkclass.classname}</option>
+                                        </volist>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">是否审核：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="islock" class="ace" value="1" <eq name="link.islock" value="1">checked="checked"</eq>>
+                                        <span class="lbl"> 通过审核</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('Expand/link',array('isprevpage'=>1))}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        var infoId = "{$link.id}";
+        if(infoId){
+            var loadurl = "{:U('Expand/link',array('isprevpage'=>1))}";
+        }else{
+            var loadurl = "{:U('Expand/link')}";
+        }
+        $(".linkAddForm").MotorsSubmit({
+            ajaxurl:"{:U('Expand/linkAdd')}",
+            loadurl:loadurl
+        });
+    </script>
+</block>

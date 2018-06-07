@@ -1,0 +1,52 @@
+
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Block/index',array('isprevpage'=>1))}">区块管理</a></li>
+            <li>调用代码</li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <div class="form_group">
+                            <div class="form_txt">区块名称：</div>
+                            <div class="form_input">{$info.name}</div>
+                        </div>
+                        <div class="form_group">
+                            <div class="form_txt">调用代码：</div>
+                            <div class="form_input">
+                            <textarea id="content" rows="4" style="width:96%;" class="tt"><literal>{:W('Block/index',array('name'=>'</literal>{$info.name}<literal>'))}</literal></textarea>
+                            <br>
+                            <span>将代码放到相应的模板里即可</span>
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <div class="form_bnt">
+                                <a href="{:U('Block/index',array('isprevpage'=>1))}" class="btn btn-white btn-warning btn-round">
+                                    <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                    返回
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>

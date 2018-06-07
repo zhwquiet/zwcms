@@ -1,0 +1,214 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Category/index')}">栏目管理</a></li>
+            <li>添加栏目</li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                    <form class="form-horizontal formname" method="post">
+                        <input type="hidden" name="id" value="{$data.id}"/>
+                        <div class="form_group">
+                            <div class="form_txt">栏目名称：</div>
+                            <div class="form_input">
+                                <input type="text" name="catename" id="t0" size="40" maxlength="50" class="ip" value="{$data.catename}" data-rule="栏目名称:required;"></div>
+                        </div>
+                        <if condition="$flag neq -2">
+                        <div class="form_group">
+                            <div class="form_txt">英文目录：</div>
+                            <div class="form_input">
+                                <input type="text" name="catedir" id="t1" size="40" maxlength="50" class="ip" value="{$data.catedir}">
+                                <input type="button" value="拼音" class="bnt_pinyin bnt_save" config="t0:t1"><span>可以为空，示例："news"或"about/honor"</span>
+                            </div>
+                        </div>
+                        </if>
+                        <div class="form_group">
+                            <div class="form_txt">栏目选择：</div>
+                            <div class="form_input">
+                                <input type="hidden" name="pid" id="t2" value="{$level.id|default=0}">
+                                <input type="text" class="ip" id="t2_1" size="40" maxlength="50" value="{$level.catename|default=作为一级栏目}" readonly="readonly">
+                                <empty name="pid">
+                                    <div class="dropdowns">
+                                        <input type="button" value="选择" class="bnt_save tt11">
+                                        <ul id="treeDemo" class="ztree"></ul>
+                                    </div>
+                                    <input type="button" value="清空" class="bnt_normal bnt_cate">
+                                </empty>
+                            </div>
+                        </div>
+                        <if condition="$flag eq 1">
+                            <div class="form_group">
+                                <div class="form_txt">属性设置：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <notempty name="data.modelid">
+                                        <select name="modelid" id="t3" class="ip beautify_input" data-rule="模型:required;" config="">
+                                            <foreach name="list" item="item">
+                                                <if condition="$data['modelid'] eq $item['id']">
+                                                <option value="{$item.id}" config="{$item.config}" selected>{$item.modelname}</option>
+                                                </if>
+                                            </foreach>
+                                        </select>
+                                    <else/>
+                                        <select name="modelid" id="t3" class="ip beautify_input" data-rule="模型:required;" config="">
+                                            <option value="">请选择模型</option>
+                                            <foreach name="list" item="item">
+                                                <option value="{$item.id}" config="{$item.config}" <if condition="$item['id'] eq $level['modelid']">selected</if>>{$item.modelname}</option>
+                                            </foreach>
+                                        </select>
+                                    </notempty>
+                                    <span>添加之后不能修改</span>
+                                </div>
+                            </div>
+                        <else/>
+                            <input type="hidden" name="modelid" value="{$flag}"/>
+                            <input type="hidden" id="t3" config="page"/>
+                        </if>
+                        <div class="form_group">
+                            <div class="form_txt">栏目图片：</div>
+                            <div class="form_input">
+                                <input type="text" size="50" maxlength="255" class="ip" value="{$data.catepicid|getattachurl}" disabled/>
+                                <input type="hidden" name="catepicid" value="{$data.catepicid}"/>
+                                <input type="button" value="上传" id="upbtn" data-type="1" class="bnt bnt_save" />
+                                <span>可以为空</span>
+                            </div>
+                            <div class="form_input img-div" <empty name="data.catepicid">style="display:none;"</empty>>
+                                <img src="{$data.catepicid|getattachurl}"/>
+                                <i class="iconfont icon-close img-del"></i>
+                            </div>
+                        </div>
+                        <if condition="$flag eq -2">
+                            <div class="form_group">
+                                <div class="form_txt">链接地址：</div>
+                                <div class="form_input">
+                                    <input type="text" name="cateurl" value="{$data.cateurl}" style="width: 322px" size="5" maxlength="255" title="链接" class="ip">
+                                    <span>示例："Book/index"</span>
+                                </div>
+                            </div>
+                        </if>
+                        <if condition="$flag eq 1">
+                            <div class="form_group">
+                                <div class="form_txt">分页/排序：</div>
+                                <div class="form_input">
+                                    <input type="text" name="pagenum" size="5" maxlength="9" value="{$data.pagenum|default=20}" title="分页" class="ip" onkeyup="checkRate(this)" data-rule="分页:required;">/
+                                    <input type="text" name="ordnum" size="5" maxlength="9" value="{$data.ordnum}" title="排序" class="ip" onkeyup="checkInt(this)">
+                                    <span>排序可以为空，数字越小越靠前</span>
+                                </div>
+                            </div>
+                        <else/>
+                            <div class="form_group">
+                                <div class="form_txt">栏目排序：</div>
+                                <div class="form_input">
+                                    <input type="text" name="ordnum" size="5" maxlength="9" value="{$data.ordnum}" title="排序" class="ip" onkeyup="checkInt(this)">
+                                    <span>排序可以为空，数字越小越靠前</span>
+                                </div>
+                            </div>
+                        </if>
+                        <if condition="$flag eq 1">
+                            <div class="form_group">
+                                <div class="form_txt">列表模板：</div>
+                                <div class="form_input">
+                                    <input type="text" name="cate_list" id="t8" size="40" maxlength="100" class="ip" value="{$data.cate_list}" readonly>
+                                    <span id="list"><input type="button" value="选择" class="bnt_temp bnt_save" config="news:t8"></span>
+                                    <span><input type="button" value="清空" class="bnt_clear bnt_normal" config="t8">　可以为空</span>
+                                </div>
+                            </div>
+                        </if>
+                        <if condition="$flag neq -2">
+                        <div class="form_group">
+                            <div class="form_txt">内容模板：</div>
+                            <div class="form_input">
+                                <input type="text" name="cate_show" id="t9" size="40" maxlength="100" class="ip" value="{$data.cate_show}" readonly>
+                                <span id="show"><input type="button" value="选择" class="bnt_temp bnt_save" config="news:t9"></span>
+                                <span><input type="button" value="清空" class="bnt_clear bnt_normal" config="t9">　可以为空</span>
+                            </div>
+                        </div>
+
+                        <div class="form_group">
+                            <div class="form_txt">优化标题：</div>
+                            <div class="form_input"><input type="text" name="seotitle" value="{$data.seotitle}" size="60" maxlength="255" class="ip"><span>可以为空，为空时显示栏目名称</span>
+                            </div>
+                        </div>
+                        <if condition="$flag eq 1">
+                            <div class="form_group">
+                                <div class="form_txt">内容页规则：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="urlrule" class="ip beautify_input">
+                                        <option value="id" <eq name="data.urlrule" value="id">selected</eq>>自动编号</option>
+                                        <option value="dateid" <eq name="data.urlrule" value="dateid">selected</eq>>日期+编号</option>
+                                    </select>
+                                    <span>静态模式下使用</span>
+                                </div>
+                            </div>
+                        </if>
+                        <div class="form_group">
+                            <div class="form_txt">关键字：</div>
+                            <div class="form_input">
+                                <input type="text" name="catekey" value="{$data.catekey}" size="60" maxlength="255" class="ip" onkeyup="strlen_verify(this,'key_len',255)">
+                                还可输入<span id="key_len">255</span>个字符<br>
+                                <span>META标签的keywords内容. 关键字之间使用 "," 分隔</span>
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <div class="form_txt">描述信息：</div>
+                            <div class="form_input">
+                                <input type="text" name="catedesc" value="{$data.catedesc}" size="60" maxlength="255" class="ip" onkeyup="strlen_verify(this,'key_desc',255)">
+                                还可输入<span id="key_desc">255</span>个字符<br>
+                                <span>META标签的description内容</span>
+                            </div>
+                        </div>
+                        </if>
+                        <div class="form_group">
+                            <div class="form_bnt">
+                                <button class="btn btn-white btn-info btn-round" type="submit">
+                                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                </button>
+                                <a href="{:U('Category/index')}" class="btn btn-white btn-warning btn-round">
+                                    <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                    返回
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                $("#t3").attr('config',$("#t3").find("option:selected").attr('config'));
+
+                setCheck({$menuTree|default= ''},function(event, treeId, treeNode, clickFlag) {
+                    $('#t2_1').val(treeNode.name);
+                    $('#t2').val(treeNode.id);
+                    $('#treeDemo').hide();
+                });
+
+            });
+            $(".formname").MotorsSubmit({
+                ajaxurl:"{:U('Category/addItem')}",
+                loadurl:"{:U('Category/index')}"
+            });
+        });
+    </script>
+</block>

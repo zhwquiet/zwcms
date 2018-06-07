@@ -1,0 +1,83 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Block/index',array('isprevpage'=>1))}">区块管理</a></li>
+            <li>新建区块</li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post">
+                            <input type="hidden" name="id" value="{$info.id}"/>
+                            <div class="form_group">
+                                <div class="form_txt">区块名称：</div>
+                                <div class="form_input">
+                                    <notempty name="info.name">
+                                        {$info.name}
+                                        <else/>
+                                        <input type="text" name="name" size="30" maxlength="20" class="ip" data-rule="区块名称:required;letters;" />　<span>只能为字母，保存后不能更改</span>
+                                    </notempty>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">区块说明：</div>
+                                <div class="form_input"><input type="text" name="desc" size="50" maxlength="100" class="tt" data-rule="区块说明:required;" value="{$info.desc}"></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">区块内容：</div>
+                                <div class="form_input">
+                                    <textarea name="content" id="container" class="tt" data-rule="区块内容:required;">{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('Block/index',array('isprevpage'=>1))}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        if(ue){
+            ue.destroy();
+        }
+        var ue = UE.getEditor('container');
+        var infoId = "{$info.id}";
+        if(infoId){
+            var loadurl = "{:U('Block/index',array('isprevpage'=>1))}";
+        }else{
+            var loadurl = "{:U('Block/index')}";
+        }
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('Block/add')}",
+            loadurl:loadurl
+        });
+    </script>
+</block>

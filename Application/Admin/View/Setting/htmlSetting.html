@@ -1,0 +1,82 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li>
+                <span>优化设置</span>
+            </li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <div class="form_group">
+                                <div class="form_txt">生成目录：</div>
+                                <div class="form_input"><input type="text" name="htmldir" size="50" maxlength="50" class="ip" value="{$htmlInfo.htmldir}" data-rule="生成目录:required;"/><span>为空时生成到根目录，示范："html/"</span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">保存内容时：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input name="htmlhome" type="checkbox" class="ace" value="1" <if condition="$htmlInfo['htmlhome'] eq 1">checked</if>>
+                                        <span class="lbl"> 生成网站首页</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="htmlclass" type="checkbox" class="ace" value="1" <if condition="$htmlInfo['htmlclass'] eq 1">checked</if>>
+                                        <span class="lbl"> 生成所属于类别</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="htmlcontent" type="checkbox" class="ace" value="1" <if condition="$htmlInfo['htmlcontent'] eq 1">checked</if>>
+                                        <span class="lbl"> 生成当前内容</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt" style="width:20%;line-height: 32px;text-align:left;">保存内容时候生成列表的数量：</div>
+                                <div style="float:left;width:100px;padding: 5px 0;">
+                                    <select name="htmltotal" class="ip beautify_input">
+                                        <for start='1' end='11'>
+                                            <option value="{$i}" <eq name="htmlInfo.htmltotal" value="$i">selected</eq>>{$i}页</option>
+                                        </for>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+
+<block name="script">
+    <script>
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('Setting/htmlSetting')}"
+        });
+    </script>
+</block>
+

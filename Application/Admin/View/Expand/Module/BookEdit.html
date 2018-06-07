@@ -1,0 +1,87 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Book/Index',array('isprevpage'=>1))}">留言管理</a></li>
+            <li>
+                查看/回复留言
+            </li>
+        </ul><!-- /.breadcrumb -->
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <div class="form_group">
+                                <div class="form_txt">昵称：</div>
+                                <div class="form_input">
+                                    <input type="text" name="username" size="50" maxlength="50" class="ip" value="{$bookOne.username}" disabled />
+                                    <input type="hidden" name="bookId" value="{$bookOne.id}"/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">性别：</div>
+                                <div class="form_input"><select name="sex" class="ip" disabled>
+                                    <option value="0" <if condition="$bookOne.sex eq 0">selected</if>>保密</option>
+                                    <option value="1" <if condition="$bookOne.sex eq 1">selected</if>>男</option>
+                                    <option value="2" <if condition="$bookOne.sex eq 2">selected</if>>女</option>
+                                </select></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">联系电话：</div>
+                                <div class="form_input"><input type="text" name="tel" size="50" maxlength="50" class="ip" value="{$bookOne.tel}" disabled/></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">留言内容：</div>
+                                <div class="form_input">
+                                    <textarea name="content" cols="60" rows="6" class="tt" data-rule="留言内容:required;"  disabled>{$bookOne.content}</textarea>
+                                    　			</div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">管理回复：</div>
+                                <div class="form_input"><textarea name="reply" cols="60" rows="6" class="tt" onKeyUp="strlen_verify(this,'replyW',255)">{$bookOne.reply}</textarea>
+                                    还可输入<span id="replyW">{$bookOne.reply|strLength=255}</span> 个字符，可以为空</div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">管理操作：</div>
+                                <div class="form_input"><input type="checkbox" name="lock" id="t5" value="1" <if condition="$bookOne.islock eq 1">checked</if>  /><label for="t5">通过审核</label></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('Book/Index',array('isprevpage'=>1))}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Admin/Js/checkWord.js"></script>
+    <script>
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('Book/bookEdit')}",
+            loadurl:"{:U('Book/Index',array('isprevpage'=>1))}"
+        });
+    </script>
+</block>

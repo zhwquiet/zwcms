@@ -1,0 +1,45 @@
+<extend name="Common/base"/>
+
+<block name="body">
+	<!-- #section:basics/content.breadcrumbs -->
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="admin.php">首页</a>
+			</li>
+			<li><span>区块管理</span></li>
+		</ul><!-- /.breadcrumb -->
+
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<div class="page-content">
+		<!-- /section:settings.box -->
+		<div class="page-content-area">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="nav_menu">
+						<ul>
+							<li><a href="{:U('Block/add')}"><span class="icon iconfont icon-liebiaoshouqi"></span>新建区块</a></li>
+						</ul>
+					</div>
+
+					<div id="tablelist"></div>
+					<!-- PAGE CONTENT ENDS -->
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content-area -->
+	</div><!-- /.page-content -->
+</block>
+<block name="script">
+	<script>
+        var durl ="{:U('Block/ajaxpage')}";
+        isprevpage="{$Think.get.isprevpage}";
+        $(window).load(function(){
+            ajaxContent();
+        });
+	</script>
+</block>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="Common/meta"/>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+
+<div id="container">
+      <div class="left">
+	      <!--left begin-->
+          <div class="pc_header"><img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />网站地图</div>
+          <div class="pc_body sitemap">
+            <volist name="menulist" id="v">
+            	<div class="big"><a href="/list/{$v.id}.html">{$v.catename}</a></div>
+            	<notempty name="v.child">
+            	<div>
+            	<volist name="v.child" id="cv">
+            	<a href="/list/{$cv.id}.html"<eq name="cv.modelid" value="-2">target="_blank"</eq>>{$cv.catename}</a>
+            	</volist>
+            	</div>
+            	</notempty>
+            </volist>      
+          </div>
+          <!--left over-->
+      </div>
+      <div class="right">
+          <div class="pc_header"><img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />最新资讯</div>
+          <div class="pc_body p15">
+              <ul class="topnews">
+                  <zxcms:rs limit="10" field="a.id,a.title,a.style,a.createtime,a.isurl,a.url" table="content a" join="left join zx_category b on a.categoryid=b.id"  where="a.islock=1 and b.modelid gt 0">
+                  <li><span>·</span><a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq>>{$v.title}</a></li>
+                 <zxcms:eof/>
+                 <li><span>·</span>没有资料</li>
+                 </zxcms:rs>
+              </ul>
+          </div>
+          <div class="pc_header mt10">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+          </div>
+          <div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+      </div>
+</div>
+
+<include file="Common/footer"/>
+</body>
+</html>

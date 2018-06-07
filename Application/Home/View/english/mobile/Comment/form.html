@@ -1,0 +1,15 @@
+<form class="form_comment" method="post">
+	<div class="commentadd">
+		<div class="text">
+			<div class="div">
+				<textarea name="content" id="comment_content" data-rule="评论内容:required;" onkeyup="strlen_verify(this,'commentlen',255)"></textarea>
+				<span>还可以输入<span id="commentlen">255</span>个字符</span>	
+			</div>
+			<div class="input">
+				<input type="submit" value="发表评论" class="send">
+				<empty name="Think.session.memberId">SDCMS网友<else/>{$Think.session.memberName}</empty>
+				<input type="hidden" name="username" class="ip" value="<empty name="Think.session.memberId">SDCMS网友<else/>{$Think.session.memberName}</empty>" maxlength="20">
+			</div>
+		</div>
+	</div>
+</form>

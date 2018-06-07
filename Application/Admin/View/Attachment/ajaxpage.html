@@ -1,0 +1,28 @@
+<ul class="source">
+<volist name="list" id="v">
+	<li data-id="{$v.id}">
+		<eq name="v.fileext" value="pic">
+			<img width="100" height="100" src="__ROOT__{$v.path}"/>
+		<else/>
+			<img width="100" height="100" src="__PUBLIC__/Admin/Images/ext/{$v.fileext}.gif"/>
+		</eq>
+
+		<p title="{$v.name}">{$v.name}</p>
+
+
+		<in name="v.id" value="$attachstr">
+			<span class="info" style="display:block;"></span>
+		<else/>
+			<span class="del">
+				<img width="100%" src="__PUBLIC__/Admin/Images/del.png"/>
+			</span>
+		</in>
+
+		<span class="selected" data-url="{$v.path}">
+			<img width="100%" src="__PUBLIC__/Admin/Images/selected.png"/>
+		</span>
+	</li>
+
+</volist>
+</ul>
+{$page}

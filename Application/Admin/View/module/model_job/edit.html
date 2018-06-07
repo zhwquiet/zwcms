@@ -1,0 +1,174 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <eq name="referer.c" value="Category">
+                <li>
+                    <a href="{:U('Category/index')}">栏目管理</a>
+                </li>
+                <else/>
+                <li>
+                    <a href="{:U('Content/index')}">内容列表</a>
+                </li>
+            </eq>
+
+            <li><a href="{$referer.url}&isprevpage=1">内容管理</a></li>
+
+            <li><span>发布内容</span></li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post" id="saveAll4">
+                            <input type="hidden" name="id" value="{$contentinfo.id}"/>
+                            <input type="hidden" name="categoryid" value="{$contentinfo.categoryid}"/>
+                            <div class="form_group">
+                                <div class="form_txt">标题：</div>
+                                <div class="form_input">
+                                    <input type="text" name="title" size="50" maxlength="255" class="ip" id="t0" data-rule="标题:required;" value="{$contentinfo.title}"/>
+                                    <label class="checklabel">
+                                        <input type="checkbox" id="s0" class="ace" <notempty name="stylearr.font-weight">checked</notempty>>
+                                        <span class="lbl"> 粗体</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" id="s1" class="ace" <notempty name="stylearr.font-style">checked</notempty>>
+                                        <span class="lbl"> 斜体</span>
+                                    </label>
+                                    <input type="hidden" name="c0" id="c0" <notempty name="stylearr.font-weight">value="font-weight:bold;"</notempty>/>
+                                    <input type="hidden" name="c1" id="c1" <notempty name="stylearr.font-style">value="font-style:italic;"</notempty>/>
+                                    <input type="hidden" name="s2" id="s2" <notempty name="stylearr.font-color">value="font-color:{$stylearr.font-color}"</notempty>/>
+                                    <img src="__PUBLIC__\Admin\Images\colorpicker.gif" title="标题颜色" align="absmiddle" id="color" <notempty name="stylearr.font-color">style="background:{$stylearr.font-color};"</notempty>/>
+                                    <span for="t0" class="msg-box"></span>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">缩略图：</div>
+                                <div class="form_input">
+                                    <input type="text" size="50" maxlength="255" class="ip" value="{$contentinfo.picid|getattachurl}" disabled/>
+                                    <input type="hidden" name="picid" value="{$contentinfo.picid}"/>
+                                    <input type="button" value="上传" id="upbtn" data-type="1" class="bnt bnt_save" />　<span>可以为空</span>
+                                </div>
+                                <div class="form_input img-div" style="display:none;">
+                                    <img src="{$contentinfo.picid|getattachurl}">
+                                    <i class="iconfont icon-close img-del"></i>
+                                </div>
+                            </div>
+                            <foreach name="modelList" item="item">
+                                <div class="form_group">
+                                    <div class="form_txt">{$item.falias}：</div>
+                                    <div class="form_input">
+                                        {$item|echooptions=$data['my_'.$item["fname"]]}
+                                    </div>
+                                </div>
+                            </foreach>
+                            <div class="form_group">
+                                <div class="form_txt">招聘人数：</div>
+                                <div class="form_input">
+                                    <input type="text" name="neednum" size="50" maxlength="9" class="ip" value="{$data.neednum}" onkeyup="checkInt(this);" data-rule="招聘人数:required;digits;" /><span>为0时表示若干</span><span for="t7" class="msg-box"></span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">工作地点：</div>
+                                <div class="form_input">
+                                    <input type="text" name="workspace" size="50" maxlength="50" class="ip" value="{$data.workspace}" data-rule="工作地点:required;" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">工作职责：</div>
+                                <div class="form_input">
+                                    <textarea name="workduty" id="workduty" style="width:98%;">{$data.workduty}</textarea></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">岗位要求：</div>
+                                <div class="form_input">
+                                    <textarea name="content" id="content" style="width:98%;">{$data.content}</textarea></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">META关键字：</div>
+                                <div class="form_input"><input type="text" name="keyword" value="{$contentinfo.keyword}" size="50" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">META描述：</div>
+                                <div class="form_input"><input type="text" name="description" value="{$contentinfo.description}" size="50" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">排序：</div>
+                                <div class="form_input">
+                                    <input type="text" name="ordnum" size="25" maxlength="50" value="{$contentinfo.ordnum}" class="ip" onkeyup="checkInt(this)"/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">状态：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="islock" class="ace" value="1" <neq name="contentinfo.islock" value="0">checked</neq>>
+                                        <span class="lbl"> 发布</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="isnice" class="ace" value="1" <eq name="contentinfo.isnice" value="1">checked</eq>>
+                                        <span class="lbl"> 推荐</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="ontop" class="ace" value="1" <eq name="contentinfo.ontop" value="1">checked</eq>>
+                                        <span class="lbl"> 置顶</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="iscomment" class="ace" value="1" <eq name="contentinfo.iscomment" value="1">checked</eq>>
+                                        <span class="lbl"> 允许评论</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{$referer.url}&isprevpage=1" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        if(ue){
+            ue.destroy();
+        }
+        if(ue1){
+            ue1.destroy();
+        }
+        var ue = UE.getEditor('workduty');
+        var ue1 = UE.getEditor('content');
+        var infoId = "{$contentinfo.id}";
+        if(infoId){
+            var loadurl = "{$referer.url}&isprevpage=1";
+        }else{
+            var loadurl = "{$referer.url}";
+        }
+        $(".formname").MotorsSubmit({
+            theme:"yellow_right_effect",
+            ajaxurl:"{:U('Content/savemodelcontent')}",
+            loadurl:loadurl
+        });
+    </script>
+</block>

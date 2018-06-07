@@ -1,0 +1,27 @@
+    <div class="table_form">
+        <form class="formname nice-validator n-yellow" method="post" novalidate="novalidate">
+            <input type="hidden" id="itempId" value="{$Think.post.cateid}"/>
+            <div class="form_group">
+                <div class="form_txt">当前栏目：</div>
+                <div class="form_input">{$catename}</div>
+            </div>
+            <div class="form_group">
+                <div class="form_txt">目标栏目：</div>
+                <div class="form_input"><input type="hidden" name="t0" id="t0" value="0">
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $(function () {
+                function onClick(event, treeId, treeNode, clickFlag) {
+                    $('#itempId').val(treeNode.id);
+                }
+                $(document).ready(function () {
+                    setCheck({$list |default= ''},onClick);
+            });
+        });
+        });
+    </script>

@@ -1,0 +1,96 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('System/adminList')}">管理员管理</a></li>
+            <li>
+                <empty name="adminInfo">
+                    添加
+                    <else/>
+                    编辑
+                </empty>
+            </li>
+        </ul><!-- /.breadcrumb -->
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <input type="hidden" value="{$adminInfo.id}" name="id">
+                            <div class="form_group">
+                                <div class="form_txt">用户名：</div>
+                                <div class="form_input">
+                                    <input type="text" name="adminname" size="30" maxlength="20" class="ip" value="{$adminInfo.adminname}" <notempty name="adminInfo">disabled="disabled"</notempty> /><span>不可修改</span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">密码：</div>
+                                <div class="form_input"><input type="password" name="password" size="30" maxlength="20" class="ip" data-rule="密码:password;"/><span>不修改请留空</span></div>
+                                <input type="hidden" name="oldPassword" value="{$adminInfo.password}">
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">笔名：</div>
+                                <div class="form_input"><input type="text" name="penname" size="30" maxlength="20" class="ip" value="{$adminInfo.penname}" data-rule="笔名:required;" /><span>用于发布内容处的作者</span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">状态：</div>
+                                <div class="form_input">
+
+                                    <label class="checklabel">
+                                        <input name="islock" type="radio" class="ace" value="0" <if condition="$adminInfo['islock'] eq 0">checked</if>>
+                                        <span class="lbl"> 锁定</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input name="islock" type="radio" class="ace" value="1" <if condition="$adminInfo['islock'] eq 1">checked</if>>
+                                        <span class="lbl"> 正常</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">所属角色：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="groupid" class="ip beautify_input" data-rule="所属角色:required;">
+                                        <option value="">请选择</option>
+                                        <foreach name="groupInfo" item="vo">
+                                            <option value="{$vo.id}" <eq name="vo.id" value="$adminInfo.groupid">selected</eq>>{$vo.groupname}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('System/adminList')}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('System/addAdmin')}",
+            loadurl:"{:U('System/adminList')}"
+        });
+    </script>
+</block>

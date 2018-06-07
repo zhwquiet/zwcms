@@ -1,0 +1,139 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('System/groupList')}">角色管理</a></li>
+            <li>
+                页面权限
+            </li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <div class="form_group" style="line-height: 30px;">
+                                <div class="form_txt">全部选择：</div>
+                                <div class="form_input">
+                                    <label>
+                                        <input name="chkall" type="checkbox" class="ace">
+                                        <span class="lbl">全选/取消</span>
+                                    </label>
+                                </div>
+                                <input type="hidden" value="{$id}" name="id">
+                            </div>
+                            <foreach name="menutree" item="vo">
+                                <div class="form_group" style="line-height: 30px;">
+                                    <div class="form_txt">
+                                        <label>
+                                            <input name="parentId" type="checkbox" class="ace" value="{$vo.id}" <if condition="in_array($vo['id'],$levelArr)">checked</if>>
+                                            <span class="lbl">{$vo.title}</span>
+                                        </label>
+                                    </div>
+                                    <div class="form_input">
+                                        <foreach name="vo['child']" item="value">
+                                            <label class="checklabel">
+                                                <input name="childId" type="checkbox" class="ace" value="{$value.id}" <if condition="in_array($value['id'],$levelArr)">checked</if>>
+                                                <span class="lbl">{$value.title}</span>
+                                            </label>
+                                        </foreach>
+                                    </div>
+                                </div>
+                            </foreach>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('System/groupList')}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        $(function() {
+            $('input[name="childId"]').click(function() {
+                if($(this).parent().siblings().find("input:checked").length > 0 || $(this).prop('checked')){
+                    var checked = true;
+                }else{
+                    var checked = false;
+                }
+                $(this).parents(".form_input").prev().find('input[name="parentId"]').prop('checked', checked);
+            });
+            $('input[name="parentId"]').click(function() {
+                var checked = $(this).prop('checked');
+
+                $(this).parents('.form_txt').next().find('input[name="childId"]').each(function() {
+                    $(this).prop('checked', checked);
+                });
+            });
+
+            $('input[name="chkall"]').click(function() {
+                var checked = $(this).prop('checked');
+                $('.form_group.clear input[type="checkbox"]').each(function() {
+                    $(this).prop('checked', checked);
+                })
+            })
+        });
+
+        $(".formname").validator({
+            stopOnError:true,
+            theme:'yellow_top',
+            ignore:':hidden',
+            beforeSubmit:function(){$("input[type='submit']").attr("disabled",true);},
+            valid:function(form){
+                var ids = '';
+                var id = $('input[name="id"]').val();
+                $('input[name="parentId"]').each(function() {
+                    if ($(this).prop('checked')) {
+                        ids += $(this).val() + ',';
+                    }
+                });
+                $('input[name="childId"]').each(function() {
+                    if ($(this).prop('checked')) {
+                        ids += $(this).val() + ',';
+                    }
+                });
+                $.ajax({
+                    url:"{:U('System/pageConfig')}",
+                    type:"post",
+                    data:{'id':id, 'ids':ids},
+                    dataType:"json",
+                    success:function(data){
+                        var icon=1;
+                        if(!data.success){
+                            icon=2;
+                            $("input[type='submit']").attr("disabled",false);
+                        }
+                        layer.msg(data.msg, { icon: icon });
+
+                    }
+                });
+            },
+            invalid:function(){$("input[type='submit']").attr("disabled",false);}
+        });
+    </script>
+</block>

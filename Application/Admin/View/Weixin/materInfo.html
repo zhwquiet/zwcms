@@ -1,0 +1,20 @@
+<div class="list-loop">
+    <div class="info">
+        <label>{$materInfo.title}</label>
+    </div>
+    <volist name="materInfo.newslist" id="vn">
+        <eq name="key" value="0">
+            <div class="hover">
+                <div class="img">
+                    <img src="{$vn.pic_id|getattachurl}">
+                </div>
+                <a href="javascript:;">{$vn.title}</a>
+            </div>
+            <else/>
+            <div class="item">
+                <img src="{$vn.pic_id|getattachurl}">
+                <a href="javascript:;">{$vn.title}</a>
+            </div>
+        </eq>
+    </volist>
+</div>

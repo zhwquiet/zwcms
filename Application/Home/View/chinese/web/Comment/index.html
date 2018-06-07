@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<include file="Common/meta"/>
+    <link href="__PUBLIC__/Home/pc/Css/comment.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/Home/Js/comment.js"></script>
+    <script>
+	    var infoid="{$id}";
+		var ispage = true;//评论信息是否分页
+		var pageCount = 10;//评论每页显示条数
+		CommentpageAjax(1);
+	</script>
+</head>
+<body>
+<!-- 头部  -->
+<include file="Common/header"/>
+
+<!-- 导航  -->
+{:W('Nav/index')}
+<!-- 轮播banner -->
+<include file="Common/banner"/>
+
+<div id="container">
+      <div class="left">
+         <!--left begin-->
+          <div class="pc_header">
+          	<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />评论信息
+          </div>
+          <div class="pc_body">
+              <div class="newslist">
+              <div class="info_title">
+              <a href="{$infourl}" title="{$infotitle}">{$infotitle}</a>
+              </div>
+              <div class="info_intro">
+              {$infointro}
+              </div>
+              <div id="commenttop"></div>
+              </div>  
+          </div>
+          
+          <div class="pc_header mt10">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />我要评论
+          </div>
+          <div class="pc_body newslist">
+               <div id="comment_staus"></div>
+          </div>
+      </div> 
+      <!--left over-->
+      
+      <div class="right">
+          <div class="pc_header">
+          <img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />随机推荐
+          </div>
+          <div class="pc_body p15">
+              <ul class="topnews">
+                    <zxcms:rs field="a.id,a.title,a.style,a.createtime,a.isurl,a.url,a.categoryid" table="content a" join="left join zx_category b on a.categoryid=b.id" where="a.islock=1 and b.modelid gt 0" limit="10">
+                    <li><a href="{$v|getinfourl}" title="{$v.title}"<eq name="v.isurl" value="1"> target="_blank"</eq> {$v.style}>{$v.title}</a></li>
+                    <zxcms:eof/>
+                    <li>没有资料</li>
+                    </zxcms:rs>
+              </ul>
+          </div>
+          <!-- 联系我们  区块调用 -->
+			<div class="pc_header mt10">
+				<img src="__PUBLIC__/Home/Images/dot.gif" width="13" height="13" />联系我们
+			</div>
+			<div class="pc_body p15 contact">{:W('Block/index',array('name'=>'contact'))}</div>
+      
+      </div>
+</div>
+
+<!-- 底部   -->
+<include file="Common/footer"/>
+</body>
+</html>

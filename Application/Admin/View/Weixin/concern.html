@@ -1,0 +1,88 @@
+<extend name="Common/base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/weixin.css">
+</block>
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>关注回复</span></li>
+        </ul><!-- /.breadcrumb -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal concernForm" method="post">
+                            <input type="hidden" name="id" value="{$info.id}" />
+                            <div class="form_group">
+                                <div class="form_txt">是否启用：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="type" class="ip beautify_input" id="reply_type">
+                                        <option value="0" <if condition="empty($info) or $info['type'] eq 0">selected</if>>关闭</option>
+                                        <option value="1" <eq name="info.type" value="1">selected</eq>>文本回复</option>
+                                        <option value="2" <eq name="info.type" value="2">selected</eq>>图文回复</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form_group" id="reply_content" <neq name="info.type" value="1">style="display: none"</neq>>
+                                <div class="form_txt">回复内容：</div>
+                                <div class="form_input">
+                                    <textarea name="content" rows="5" cols="50">{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form_group" id="reply_id" <neq name="info.type" value="2">style="display: none"</neq>>
+                                <div class="form_txt">素材选择：</div>
+                                <div class="form_input">
+                                    <div class="am-btn-group">
+                                        <a class="btn btn-primary" href="javascript:;" id="select_master">选择素材</a>
+                                        <a class="btn btn-primary" href="javascript:;" id="delete_master">清空素材</a>
+                                    </div>
+                                    <input type="hidden" name="mater_id" id="mater_id" size="50" value="{$materInfo.id}">
+                                    <div class="master_box">
+                                        <notempty name="materInfo">
+                                            <include file="materInfo"/>
+                                        </notempty>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Admin/js/weixin.js"></script>
+    <script>
+        /**
+         * 保存
+         */
+        $(".concernForm").MotorsSubmit({
+            ajaxurl:"{:U('Weixin/concern')}",
+            isreload:true
+        });
+    </script>
+</block>
+
+
+
+

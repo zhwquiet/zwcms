@@ -1,0 +1,32 @@
+<div id="nav">
+      <ul>
+        <li <empty name="classid">class="hover"</empty>><a href="/">网站首页</a></li>
+        <volist name="list" id="v">
+        	<li><img src="__PUBLIC__/Home/Images/nav_mid.gif" /></li>
+        	<li <if condition="$v['item_id'] eq $pid or $v['item_id'] eq $classid">class="hover"</if>>
+        		<a href="{$v.url}" <eq name="v.mode" value="2">target="_blank"</eq>>{$v.title}</a>
+        		<notempty name="v.child">
+        		<dl>
+	        		<volist name="v.child" id="cv">
+	        		<dt><a href="{$cv.url}" <eq name="cv.mode" value="2">target="_blank"</eq>>{$cv.title}</a></dt>
+	        		</volist>
+        		</dl>
+        		</notempty>
+        	</li>
+        </volist>
+      </ul>
+</div>
+<script>
+$(function(){
+	//导航样式
+	var cname="";
+	$("#nav li").hover(function(){
+		cname=$(this).attr("class");
+		if(!cname){$(this).addClass("hover");}
+		$(this).find("dl").show();
+	},function(){
+		$(this).find("dl").hide();
+		if(!cname){$(this).removeClass("hover");}
+	});
+})
+</script>

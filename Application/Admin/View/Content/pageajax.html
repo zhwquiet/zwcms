@@ -1,0 +1,66 @@
+<form>
+    <table id="treeTable1" class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+            <if condition="$islock eq -1 or !empty($cateid)">
+            <th width="20"><input type="checkbox" name="chkall" onClick="checkall(this.form)" title="全选/取消" /></th>
+            </if>
+            <neq name="islock" value="-1">
+            <th width="60">排序</th>
+            </neq>
+            <th>标题</th>
+            <th width="100">栏目</th>
+            <th width="50">人气</th>
+            <th width="50">缩图</th>
+            <th width="50">发布</th>
+            <th width="50">推荐</th>
+            <th width="50">置顶</th>
+            <th width="50">评论</th>
+            <th width="50">外链</th>
+            <th width="80">管理</th>
+        </tr>
+        </thead>
+        <tbody>
+        <empty name="list">
+            <tr>
+                <td colspan="13">没有资料</td>
+            </tr>
+         <else/>
+         <foreach name="list" item="item">
+            <tr class="item" id="tr_{$item.id}" data-id="{$item.id}" modelid="{$item.modelid}">
+            <if condition="$islock eq -1 or !empty($cateid)">
+            <td><input name="id" type="checkbox" value="{$item.id}" /></td>
+            </if>
+            <neq name="islock" value="-1">
+            <td><input class="ord_input" type="text" value="{$item.ordnum}" maxlength="9" onkeyup="checkInt(this)"></td>
+            </neq>
+            <td><a>{$item.title}</a></td>
+            <td><a>{$item.catename}</a></td>
+            <td>{$item.hits}</td>
+            <td><eq name="item['ispic']" value="0"><span>否</span><else/>是</eq></td>
+            <td><eq name="item['islock']" value="0"><span>否</span><else/>是</eq></td>
+            <td><eq name="item['isnice']" value="0"><span>否</span><else/>是</eq></td>
+            <td><eq name="item['ontop']" value="0"><span>否</span><else/>是</eq></td>
+            <td><eq name="item['iscomment']" value="0"><span>禁止</span><else/>是</eq></td>
+            <td><eq name="item['isurl']" value="0"><span>否</span><else/>是</eq></td>
+            <td>
+            <eq name="islock" value="-1">
+            <a href="javaScript:void(0)" class="contentrecover">恢复</a>
+            <a href="javaScript:void(0)" class="contentdelete">删除</a>
+            <else/>
+            <a href="{:U('Content/edit',array('id'=>$item['id']))}">编辑</a>
+            <a href="javaScript:void(0)" class="delete" rel="{:U('Content/delete',array('ids'=>$item['id']))}">删除</a>
+            </eq>
+            </td>
+            </tr>
+        </foreach>
+            <neq name="islock" value="-1">
+            <tr class="table_bottom">
+                <td colspan="13"><a class="save_btn_sort" data-url="{:U('Content/reSort')}">保存排序</a></td>
+            </tr>
+            </neq>
+        </empty>
+        </tbody>
+    </table>
+</form>
+{$page}

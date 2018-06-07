@@ -1,0 +1,65 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('System/groupList')}">角色管理</a></li>
+            <li>
+                <notempty name="groupInfo">
+                    编辑
+                    <else/>
+                    添加
+                </notempty>
+            </li>
+        </ul><!-- /.breadcrumb -->
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <input type="hidden" name="id" value="{$groupInfo.id}">
+                            <div class="form_group">
+                                <div class="form_txt">角色名称：</div>
+                                <div class="form_input"><input type="text" name="groupname" size="50" maxlength="20" class="ip" data-rule="角色名称:required;" value="{$groupInfo.groupname}" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">角色描述：</div>
+                                <div class="form_input"><textarea name="groupdesc" cols="60" rows="4" onKeyUp="strlen_verify(this,'t1',50)" class="tt">{$groupInfo.groupdesc}</textarea>　还可输入<span id="t1">{$groupInfo.groupdesc|strLength=50}</span> 个字符</div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{:U('System/groupList')}" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('System/addGroup')}",
+            loadurl:"{:U('System/groupList')}"
+        });
+    </script>
+</block>

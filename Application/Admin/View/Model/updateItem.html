@@ -1,0 +1,96 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><a href="{:U('Model/index')}">模型管理</a></li>
+            <li>编辑模型</li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post">
+                            <div class="form_group">
+                                <div class="form_txt">模型名称：</div>
+                                <div class="form_input">
+                                    <input type="hidden" name="id" value="{$data.id}"/>
+                                    <input type="text" name="modelname" size="50" maxlength="20" class="ip" value="{$data.modelname}"  data-rule="模型名称:required;">
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">数据表名：</div>
+                                <div class="form_input">
+                                    <input type="hidden" name="config" size="40" maxlength="20" class="ip" value="{$data.tablename}">
+                                    <input type="text" size="40" maxlength="20" class="ip" value="zx_model_{$data.tablename}" data-rule="数据表名:required;fieldname;" disabled>　
+                                    <span>不可重复，不可更改</span>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">模型描述：</div>
+                                <div class="form_input"><input type="text" name="modeldesc" size="50" maxlength="20" class="ip" value="{$data.modeldesc}"></div>
+                            </div>
+                            <!--<div class="form_group">-->
+                            <!--<div class="form_txt">后台管理路径：</div>-->
+                            <!--<div class="form_input"><input type="text" name="adminurl" size="50" maxlength="255" class="ip" aria-required="true" value="{$data.adminurl}" data-rule="后台管理路径:required;">　<span>例：sd_model_news.asp?classid=</span></div>-->
+                            <!--</div>
+                            <div class="form_group">
+                                <div class="form_txt">后台添加模板：</div>
+                                <div class="form_input"><input type="text" name="admin_add_temp" size="50" maxlength="255" class="ip" value="{$data.admin_add_temp}" data-rule="后台添加模板:required;"></div>
+                            </div>-->
+                            <div class="form_group">
+                                <div class="form_txt">后台添加修改模板：</div>
+                                <div class="form_input"><input type="text" name="admin_edit_temp" size="50" maxlength="255" class="ip" value="{$data.admin_edit_temp}" data-rule="后台修改模板:required;"></div>
+                            </div>
+                            <!--<div class="form_group">-->
+                            <!--<div class="form_txt">前台首页模板：</div>-->
+                            <!--<div class="form_input"><input type="text" name="default_temp" size="50" maxlength="255" class="ip" aria-required="true" value="{$data.default_temp}" data-rule="前台首页模板:required;"></div>-->
+                            <!--</div>-->
+                            <div class="form_group">
+                                <div class="form_txt">前台列表模板：</div>
+                                <div class="form_input"><input type="text" name="list_temp" size="50" maxlength="255" class="ip" value="{$data.list_temp}" data-rule="前台列表模板:required;"></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">前台内容模板：</div>
+                                <div class="form_input"><input type="text" name="show_temp" size="50" maxlength="255" class="ip" value="{$data.show_temp}" data-rule="前台内容模板:required;"></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="javascript:goback();" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.page-content-area -->
+        </div><!-- /.page-content -->
+    </div>
+</block>
+<block name="script">
+    <script>
+        $(".formname").MotorsSubmit({
+            theme:"yellow_right_effect",
+            ajaxurl:"{:U('Model/updateAll')}",
+            loadurl:"{:U('Model/index')}"
+        });
+    </script>
+</block>

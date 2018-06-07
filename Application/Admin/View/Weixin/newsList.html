@@ -1,0 +1,17 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th width="">编号</th>
+            <th>标题</th>
+        </tr>
+    </thead>
+    <tbody>
+        <volist name="list" id="v">
+            <tr data-id="{$v.id}">
+                <td>{$v.id}</td>
+                <td>{$v.title}</td>
+            </tr>
+        </volist>
+   </tbody>
+</table>
+{$page}

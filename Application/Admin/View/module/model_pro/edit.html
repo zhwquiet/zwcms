@@ -1,0 +1,295 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <eq name="referer.c" value="Category">
+                <li>
+                    <a href="{:U('Category/index')}">栏目管理</a>
+                </li>
+                <else/>
+                <li>
+                    <a href="{:U('Content/index')}">内容列表</a>
+                </li>
+            </eq>
+
+            <li><a href="{$referer.url}&isprevpage=1">内容管理</a></li>
+
+            <li><span>发布内容</span></li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="formname" method="post">
+                            <input type="hidden" name="id" value="{$contentinfo.id}"/>
+                            <input type="hidden" name="categoryid" value="{$contentinfo.categoryid}"/>
+                            <div class="form_group">
+                                <div class="form_txt">产品名称：</div>
+                                <div class="form_input">
+                                    <input type="text" name="title" value="{$contentinfo.title}" id="t0" size="50" maxlength="255" class="ip" data-rule="产品名称:required;" />
+                                    <label class="checklabel">
+                                        <input type="checkbox" id="s0" class="ace" <notempty name="stylearr.font-weight">checked</notempty>>
+                                        <span class="lbl"> 粗体</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" id="s1" class="ace" <notempty name="stylearr.font-style">checked</notempty>>
+                                        <span class="lbl"> 斜体</span>
+                                    </label>
+                                    <input type="hidden" name="c0" id="c0" <notempty name="stylearr.font-weight">value="font-weight:bold;"</notempty>/>
+                                    <input type="hidden" name="c1" id="c1" <notempty name="stylearr.font-style">value="font-style:italic;"</notempty>/>
+                                    <input type="hidden" name="s2" id="s2" <notempty name="stylearr.font-color">value="font-color:{$stylearr.font-color}"</notempty>/>
+                                    <img src="__PUBLIC__/Admin/Images/colorpicker.gif" title="标题颜色" align="absmiddle" id="color" />
+                                    <span for="t0" class="msg-box"></span>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">产品编号：</div>
+                                <div class="form_input"><input type="text" name="prono" value="{$data.prono}" size="25" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">产品型号：</div>
+                                <div class="form_input"><input type="text" name="promode" value="{$data.promode}" size="25" maxlength="10" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">产品价格：</div>
+                                <div class="form_input"><input type="text" name="proprice" value="{$data.proprice}" size="25" maxlength="11" class="ip" data-rule="产品价格:dot;" /><span>单位：元</span></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">缩略图：</div>
+                                <div class="form_input">
+                                    <input type="text" size="50" maxlength="255" class="ip" value="{$contentinfo.picid|getattachurl}" disabled/>
+                                    <input type="hidden" name="picid" value="{$contentinfo.picid}"/>
+                                    <input type="button" value="上传" id="upbtn" data-type="1" class="bnt bnt_save" />
+                                    <span>可以为空</span>
+                                </div>
+                                <div class="form_input img-div" style="display:none;">
+                                    <img src="{$contentinfo.picid|getattachurl}">
+                                    <i class="iconfont icon-close img-del"></i>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">组图：</div>
+                                <div class="form_input">
+                                    <input type="button" value="本地上传" class="bnt_save" id="selectFile">
+                                    <input type="button" value="清空组图" class="bnt_normal" id="clearImage">
+                                </div>
+                            </div>
+                            <div class="form_group ov">
+                                <div class="form_txt">
+                                    <img src="__PUBLIC__/Admin/Images/album.gif" width="105" height="98"></div>
+                                <div class="form_input">
+
+                                    <div class="photo">
+                                        <a class="prev" href="javascript:;" title="左移"></a>
+                                        <div class="list">
+                                            <ul id="ImageArea">
+                                                <volist name="piclist" id="v">
+                                                    <li>
+                                                        <a href="{$v|getattachurl}" target="_blank">
+                                                            <img src="{$v|getattachurl}" width="80" height="60" class="img" />
+                                                        </a>
+                                                        <div>
+                                                            <img src="__PUBLIC__/Admin/Images/_l.gif" class="leftarr" title="左移" />
+                                                            <img src="__PUBLIC__/Admin/Images/_r.gif" class="rightarr" title="右移" />
+                                                            <img src="__PUBLIC__/Admin/Images/_d.gif" class="delarr" title="删除" />
+                                                        </div>
+                                                        <input type="hidden" name="picarr[]" value="{$v}" />
+                                                    </li>
+                                                </volist>
+                                            </ul>
+                                        </div>
+                                        <a class="next" href="javascript:;" title="右移"></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <foreach name="modelList" item="item">
+                                <div class="form_group">
+                                    <div class="form_txt">{$item.falias}：</div>
+                                    <div class="form_input">
+                                        {$item|echooptions=$data['my_'.$item["fname"]]}
+                                    </div>
+                                </div>
+                            </foreach>
+                            <div class="form_group">
+                                <div class="form_txt">产品简介：</div>
+                                <div class="form_input">
+                                    <textarea name="intro" cols="39" rows="10" maxlength="255" style="width:98%;">{$data.introduction}</textarea>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">产品介绍：</div>
+                                <div class="form_input">
+                                    <textarea name="content" id="container" cols="39" rows="6" style="width:98%;">{$data.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">META关键字：</div>
+                                <div class="form_input"><input type="text" name="keyword" value="{$contentinfo.keyword}" size="50" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">META描述：</div>
+                                <div class="form_input"><input type="text" name="description" value="{$contentinfo.description}" size="50" maxlength="255" class="ip" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">排序：</div>
+                                <div class="form_input">
+                                    <input type="text" name="ordnum" size="25" maxlength="50" value="{$contentinfo.ordnum}" class="ip" onkeyup="checkInt(this)"/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">状态：</div>
+                                <div class="form_input">
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="islock" class="ace" value="1" <neq name="contentinfo.islock" value="0">checked</neq>>
+                                        <span class="lbl"> 发布</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="isnice" class="ace" value="1" <eq name="contentinfo.isnice" value="1">checked</eq>>
+                                        <span class="lbl"> 推荐</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="ontop" class="ace" value="1" <eq name="contentinfo.ontop" value="1">checked</eq>>
+                                        <span class="lbl"> 置顶</span>
+                                    </label>
+                                    <label class="checklabel">
+                                        <input type="checkbox" name="iscomment" class="ace" value="1" <eq name="contentinfo.iscomment" value="1">checked</eq>>
+                                        <span class="lbl"> 允许评论</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                    <a href="{$referer.url}&isprevpage=1" class="btn btn-white btn-warning btn-round">
+                                        <i class="ace-icon fa fa-undo bigger-120 orange"></i>
+                                        返回
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+<block name="script">
+    <script>
+        if(ue){
+            ue.destroy();
+        }
+        var ue = UE.getEditor('container');
+        //上传本地图片
+        var previewHTML='';
+        $("#selectFile").click(function(){
+            $.post("admin.php?s=/Upload/index",{'uptype':1,'uploadLimit':5},function(str){
+                var index=layer.open({
+                    type: 1,
+                    area:['580px','400px'],
+                    title: '上传图片',
+                    closeBtn: 1,
+                    shadeClose: false,
+                    skin: '',
+                    content: str,
+                    btn:['确定','取消'],
+                    yes:function(){
+                        var upimg = JSON.parse($.cookie('upimg'));
+                        $.each(upimg,function(i,e){
+                            var ImageHtml='<li>'
+                            ImageHtml+='<a href="'+e.path+'" target="_blank"><img src="'+e.path+'" width="80" height="60" class="img" /></a>'
+                            ImageHtml+='<div>'
+                            ImageHtml+='<img src="Public/Admin/Images/_l.gif" class="leftarr" title="左移" />'
+                            ImageHtml+='<img src="Public/Admin/Images/_r.gif" class="rightarr" title="右移" />'
+                            ImageHtml+='<img src="Public/Admin/Images/_d.gif" class="delarr" title="删除" />'
+                            ImageHtml+='</div>'
+                            ImageHtml+='<input type="hidden" name="picarr[]" value="'+e.id+'" />'
+                            ImageHtml+='</li>'
+                            previewHTML+=ImageHtml;
+                        });
+                        if(previewHTML){
+                            $('#ImageArea').prepend(previewHTML);
+                            previewHTML='';
+                        }
+                        layer.close(index);
+                    },
+                    cancel:function(){
+                        layer.close(index);
+                    }
+                });
+            });
+        });
+
+        //左移
+        $("#ImageArea").on('click','.leftarr',function(){
+            var $Imageli=$(this).parent().parent();
+            var $ImagePrevli=$Imageli.prev("li");
+            if($ImagePrevli.length>0){
+                $ImagePrevli.insertAfter($Imageli);
+            }
+        });
+
+        //右移
+        $("#ImageArea").on('click','.rightarr',function(){
+            var $Imageli=$(this).parent().parent();
+            var $ImageNextli=$Imageli.next("li");
+            if($ImageNextli.length>0){
+                $ImageNextli.insertBefore($Imageli);
+            }
+        });
+
+        //删除
+        $("#ImageArea").on('click','.delarr',function(){
+            var thispic=$(this).parent().parent();
+            var index = layer.confirm('确定要删除？', {
+                btn: ['确定','取消'], //按钮
+                title:'退出登录'
+            }, function(){
+                thispic.remove();
+                layer.close(index);
+            }, function(){
+                layer.close(index);
+            });
+        });
+        //清空
+        $("#clearImage").click(function() {
+            var thispic=$("#ImageArea li");
+            var index = layer.confirm('确定要清空组图？', {
+                btn: ['确定','取消'], //按钮
+                title:'退出登录'
+            }, function(){
+                thispic.remove();
+                layer.close(index);
+            }, function(){
+                layer.close(index);
+            });
+        });
+        var infoId = "{$contentinfo.id}";
+        if(infoId){
+            var loadurl = "{$referer.url}&isprevpage=1";
+        }else{
+            var loadurl = "{$referer.url}";
+        }
+        $(".formname").MotorsSubmit({
+            theme:'yellow_right_effect',
+            ajaxurl:"{:U('Content/savemodelcontent')}",
+            loadurl:loadurl
+        });
+    </script>
+</block>

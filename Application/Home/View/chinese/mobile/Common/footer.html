@@ -1,0 +1,24 @@
+<div id="footer" class="p15">
+	<div>
+		<a href="index.php">网站首页</a>　|　
+		<zxcms:rs table="category" field="id,catename" where="pid=0 and modelid=-1" order="ordnum,id" limit="10">
+		<a href="/list/{$v.id}.html">{$v.catename}</a>　|　
+		<zxcms:eof/></zxcms:rs>
+		<a href="/book.html">在线留言</a>　|　
+		<a href="/sitemap.html">网站地图</a>
+	</div>
+	版权所有：{$Think.const.WEBNAME}
+	<br />
+	Powered by <a href="http://www.wfwzzz.com" target="_blank">wfwzzz.com</a>　
+</div>
+
+
+
+<!--顶部动画js文件-->
+<script>
+	E.config({baseUrl:'{$Think.const.WEBURL}__PUBLIC__/Home/Js/'});
+	E.use('switchable',function(){
+		var Switchable=E.ui.Switchable,sc;
+		var sc=new Switchable('#switchable3',{effects:'slideX',nav:true});
+	});
+</script>

@@ -1,0 +1,103 @@
+<extend name="Common/base"/>
+
+<block name="body">
+	<!-- #section:basics/content.breadcrumbs -->
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="admin.php">首页</a>
+			</li>
+			<li><span>素材管理</span></li>
+		</ul><!-- /.breadcrumb -->
+
+
+		<!-- /section:basics/content.searchbox -->
+	</div>
+
+	<div class="page-content">
+		<!-- /section:settings.box -->
+		<div class="page-content-area">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="nav_menu">
+						<ul>
+							<li class="dropdown">
+								<a class="fastdel" href="javaScript:;">
+									<span class="icon iconfont icon-shanchu"></span>一键清理
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div id="tablelist" class="imglist"></div>
+					<!-- PAGE CONTENT ENDS -->
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content-area -->
+	</div><!-- /.page-content -->
+</block>
+<block name="script">
+	<script>
+
+        var durl ="{:U('Attachment/ajaxpage')}";
+        $(window).load(function(){
+            ajaxContent();
+        });
+        $(document).on('mouseover','.imglist ul li',function(){
+            $(this).find(".del").show();
+        });
+        $(document).on('mouseout','.imglist ul li',function(){
+            $(this).find(".del").hide();
+        });
+        $(document).on('click','.imglist .del',function(){
+            var li = $(this).parent();
+            var id = li.attr('data-id');
+            var index=layer.open({
+                content:'确定要删除这个文件？',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url:"{:U('Attachment/del')}",
+                        data:'id='+id,
+                        dataType:"json",
+                        success:function(info){
+                            var icon=2;
+                            if(info.success){
+                                icon=1;
+                                li.fadeOut();
+                            }
+                            layer.msg(info.msg, { icon: icon });
+                        },
+                        error:function(){}
+                    });
+                    layer.close(index);
+                },
+                cancel:function(){layer.close(index);}
+            });
+        });
+        $(".fastdel").click(function(){
+            var index=layer.open({
+                content:'确定要执行该操作，删除后无法恢复？',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url:"{:U('Attachment/fastdel')}",
+                        dataType:"json",
+                        success:function(info){
+                            var icon=2;
+                            if(info.success){
+                                icon=1;
+                                ajaxContent(1);
+                            }
+                            layer.msg(info.msg, { icon: icon });
+                        },
+                        error:function(){}
+                    });
+                    layer.close(index);
+                },
+                cancel:function(){layer.close(index);}
+            });
+        });
+	</script>
+</block>

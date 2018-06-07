@@ -1,0 +1,96 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li>
+                <span>微信设置</span>
+            </li>
+        </ul><!-- /.breadcrumb -->
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table_form">
+                        <form class="form-horizontal formname" method="post">
+                            <div class="form_group">
+                                <div class="form_txt">微信号：</div>
+                                <div class="form_input"><input type="text" name="wechat_num" size="50" class="ip" value="{$weixinInfo.wechat_num}" /></div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">AppID：</div>
+                                <div class="form_input">
+                                    <input type="text" name="appid" size="50" class="ip" value="{$weixinInfo.appid}" />
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">AppSecret：</div>
+                                <div class="form_input">
+                                    <input type="text" name="appsecret" size="50" class="ip" value="{$weixinInfo.appsecret}" />
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">EncodingAESKey：</div>
+                                <div class="form_input">
+                                    <input type="text" name="encodingaeskey" size="50" class="ip" value="{$weixinInfo.encodingaeskey}" />
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">公众号类型：</div>
+                                <div class="form_input" style="width:200px;">
+                                    <select name="type" class="ip beautify_input">
+                                        <option value="1" <eq name="weixinInfo.type" value="1">selected</eq>>订阅号</option>
+                                        <option value="2" <eq name="weixinInfo.type" value="2">selected</eq>>服务号</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">服务器URL：</div>
+                                <div class="form_input">
+                                    <input type="text" name="url" size="50" class="ip" value="{$weixinInfo.url}" disabled/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_txt">Token(令牌)：</div>
+                                <div class="form_input">
+                                    <input type="text" name="token" size="50" class="ip" value="{$weixinInfo.token}" disabled/>
+                                </div>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_bnt">
+                                    <button class="btn btn-white btn-info btn-round" type="submit">
+                                        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>
+
+<block name="script">
+    <script>
+        $(".formname").MotorsSubmit({
+            ajaxurl:"{:U('Setting/weixin')}",
+            callback:function (data) {
+                $("input[name='token']").val(data.token);
+            }
+        });
+    </script>
+</block>

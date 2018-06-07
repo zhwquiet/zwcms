@@ -1,0 +1,100 @@
+<extend name="Common/base"/>
+
+<block name="body">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="admin.php">首页</a>
+            </li>
+            <li><span>栏目管理</span></li>
+        </ul><!-- /.breadcrumb -->
+
+
+        <!-- /section:basics/content.searchbox -->
+    </div>
+
+    <div class="page-content">
+        <!-- /section:settings.box -->
+        <div class="page-content-area">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="nav_menu">
+                        <ul>
+                            <li class="dropdown">
+                                <a href="{:U('Category/addItem',array('flag'=>1))}">
+                                    <span class="icon iconfont icon-xingzhuang"></span>添加栏目
+                                </a>
+                                <dl>
+                                    <dt><a href="{:U('Category/addItem',array('flag'=>1))}">添加栏目</a></dt>
+                                    <dt><a href="{:U('Category/addItem',array('flag'=>-1))}">添加单网页</a></dt>
+                                </dl>
+                            </li>
+                            <li><a href="javascript:;" class="recache"><span class="icon iconfont icon-shuaxin"></span>清理缓存</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="tablelist">
+                        <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;min-width: 300px">栏目名称</th>
+                            <th style="width: 66px">栏目ID</th>
+                            <th style="width: 60px">排序</th>
+                            <th style="width: 70px">栏目类型</th>
+                            <th style="width: 70px">所属模型</th>
+                            <th style="width: 200px">管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="list" id="v">
+                            <tr class="item item{$v.id} child-tr child{$v.pid}" data-id="{$v.id}" data-pid="{$v.pid}">
+                            <td style="width: 200px;text-align: left;">
+                                <for start="1" end="$v['level']">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                </for>
+                                <notempty name="v.sonid">
+                                    <i class="tree-icon iconfont icon-liebiaozhankai"></i>
+                                <else/>
+                                    <i class="tree-icon iconfont icon-zixunlanmu"></i>
+                                </notempty>
+                                {$v.catename}
+                            </td>
+                            <td>{$v.id}</td>
+                            <td><input class="ord_input" type="text" value="{$v.ordnum}" maxlength="9" onkeyup="checkInt(this)"></td>
+                            <td>
+                                <if condition="$v['modelid'] eq -1"><a style="color: blue">单网页</a>
+                                    <elseif condition="$v['modelid'] eq -2"/>
+                                    <span style="color: red">外部链接</span>
+                                    <else/>
+                                    内部栏目
+                                </if>
+                            </td>
+                            <td>{$v.modelname}</td>
+                            <td class="edit">
+                                <a href="{:U('Category/addItem',array('pid'=>$v['id']))}">添加子栏目</a>
+                                <neq name="v.modelid" value="-2">
+                                    <a href="{:U('Category/content',array('cateid'=>$v['id']))}">内容管理</a>
+                                </neq>
+                                <a class="moveItem" data-id="{$v.id}">移动</a>
+                                <a href="{:U('Category/addItem',array('id'=>$v['id']))}">编辑</a>
+                                <a class="deleteItemBtn">删除</a>
+                            </td>
+                            </tr>
+                        </volist>
+                        <tr class="table_bottom">
+                            <td colspan="6">
+                                <a class="save_btn_sort" data-url="{:U('Category/reSort')}">保存排序</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content-area -->
+    </div><!-- /.page-content -->
+</block>

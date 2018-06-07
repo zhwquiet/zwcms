@@ -1,0 +1,41 @@
+[ 2018-05-26T14:25:47+08:00 ] 127.0.0.1 /en/Uploads/image/20180526/1527315947878539.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000268s ]
+
+[ 2018-05-26T14:29:29+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+
+[ 2018-05-26T14:32:41+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000642s ]
+
+[ 2018-05-26T14:38:03+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000409s ]
+
+[ 2018-05-26T14:38:27+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000594s ]
+NOTIC: [8] Constant BIND_MODULE already defined /Users/admin/websites/zxcmstrunk/ThinkPHP/Library/Think/Dispatcher.class.php 第 75 行.
+
+[ 2018-05-26T14:38:33+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000502s ]
+
+[ 2018-05-26T14:39:32+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000792s ]
+
+[ 2018-05-26T14:48:18+08:00 ] 127.0.0.1 /en/Public/Home/Images/nav_mid.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000400s ]
+
