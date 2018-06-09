@@ -15,7 +15,7 @@ function getinfourl($data){
 	if($data['isurl'] && !empty($data['url'])){
 		return $data['url'];
 	}else{
-		return '/info/'.$data['id'].'.html';	
+		return SERVER.'/info/'.$data['id'].'.html';
 	}
 }
 function ismobile() {

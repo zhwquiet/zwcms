@@ -124,9 +124,9 @@
                             <div class="form_group">
                                 <div class="form_txt">列表模板：</div>
                                 <div class="form_input">
-                                    <input type="text" name="cate_list" id="t8" size="40" maxlength="100" class="ip" value="{$data.cate_list}" readonly>
-                                    <span id="list"><input type="button" value="选择" class="bnt_temp bnt_save" config="news:t8"></span>
-                                    <span><input type="button" value="清空" class="bnt_clear bnt_normal" config="t8">　可以为空</span>
+                                    <input type="text" name="cate_list" size="40" maxlength="100" class="ip" value="{$data.cate_list}" readonly>
+                                    <span><input type="button" value="选择" class="bnt_temp bnt_save"></span>
+                                    <span><input type="button" value="清空" class="bnt_clear bnt_normal">　可以为空</span>
                                 </div>
                             </div>
                         </if>
@@ -134,9 +134,9 @@
                         <div class="form_group">
                             <div class="form_txt">内容模板：</div>
                             <div class="form_input">
-                                <input type="text" name="cate_show" id="t9" size="40" maxlength="100" class="ip" value="{$data.cate_show}" readonly>
-                                <span id="show"><input type="button" value="选择" class="bnt_temp bnt_save" config="news:t9"></span>
-                                <span><input type="button" value="清空" class="bnt_clear bnt_normal" config="t9">　可以为空</span>
+                                <input type="text" name="cate_show" size="40" maxlength="100" class="ip" value="{$data.cate_show}" readonly>
+                                <span><input type="button" value="选择" class="bnt_temp bnt_save"></span>
+                                <span><input type="button" value="清空" class="bnt_clear bnt_normal">　可以为空</span>
                             </div>
                         </div>
 
@@ -205,6 +205,39 @@
                 });
 
             });
+            //选择模板页面
+            var theme_that;
+            $(document).on('click', ".bnt_temp", function () {
+                theme_that = $(this);
+                var config = $("#t3").attr("config");
+                if(config == '' || config == undefined){
+                    layer.msg('请先选择模型', { icon: 2 });
+                    return;
+                }
+                layer.open({
+                    title: '模板选择',
+                    type: 1,
+                    shade: 0.2,
+                    area: '340px',
+                    content: "<div id='act_loading'><span class='ui-dialog-loading'>Loading..</span></div>"
+                });
+                $.ajax({
+                    url: 'admin.php/Category/getThemeData',
+                    type: 'POST',
+                    async: false,
+                    data: {'config': config},
+                    success: function (data) {
+                        $('#act_loading').replaceWith(data);
+                    }
+                });
+            });
+            $(document).on('click', ".theme_item", function () {
+                var config = $("#t3").attr("config");
+                var value = $(this).attr('attr_item');
+                theme_that.parents(".form_input").find("input.ip").val(config+'/'+value);
+                layer.closeAll();
+            });
+
             $(".formname").MotorsSubmit({
                 ajaxurl:"{:U('Category/addItem')}",
                 loadurl:"{:U('Category/index')}"

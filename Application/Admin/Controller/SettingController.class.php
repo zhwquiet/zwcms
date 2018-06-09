@@ -106,7 +106,7 @@ class SettingController extends AdminController {
         $result = M()->execute($sql);
         if($result){
             $this->config[$setname] = $setInfo;
-            S('config',$this->config);
+            S(SERVER.'config',$this->config);
             $redata['success'] = true;
             $redata['msg'] = '修改成功';
         }else{

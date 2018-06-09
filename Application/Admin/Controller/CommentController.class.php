@@ -106,7 +106,7 @@ class CommentController extends AdminController{
     			$comM->commit();
                 $this->config['expand']['commentopen'] = $data['comOpen'];
                 $this->config['expand']['commentcheck'] = $data['comCheck'];
-                S('config',$this->config);
+                S(SERVER.'config',$this->config);
                 $redata['success']=true;
                 $redata['msg']='评论配置成功';
     		}else{

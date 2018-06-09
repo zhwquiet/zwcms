@@ -126,7 +126,7 @@ class CategoryController extends AdminController {
      */
     public function getListData() {
         $config = I('config');
-        $dirPath = __ROOT__.'/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/List/' . $config;
+        $dirPath = '/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/List/' . $config;
         $this->assign('list', loopFun($dirPath));
         $this->display();
     }
@@ -136,7 +136,13 @@ class CategoryController extends AdminController {
      */
     public function getShowData() {
         $config = I('config');
-        $dirPath = __ROOT__.'/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/List/' . $config;
+        $dirPath = '/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/List/' . $config;
+        $this->assign('list', loopFun($dirPath));
+        $this->display();
+    }
+    public function getThemeData(){
+        $config = I('config');
+        $dirPath = '/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/List/' . $config;
         $this->assign('list', loopFun($dirPath));
         $this->display();
     }

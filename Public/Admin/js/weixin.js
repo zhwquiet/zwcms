@@ -1,22 +1,7 @@
 $("#reply_type").change(function () {
     var type = $(this).val();
-    if(type == 1){
-        $("#reply_content").show();
-        $("#reply_id").hide();
-        $("#replay_url").hide();
-    }else if(type == 2){
-        $("#reply_content").hide();
-        $("#reply_id").show();
-        $("#replay_url").hide();
-    }else if(type == 3){
-        $("#reply_content").hide();
-        $("#reply_id").hide();
-        $("#replay_url").show();
-    }else{
-        $("#reply_content").hide();
-        $("#reply_id").hide();
-        $("#replay_url").hide();
-    }
+    $(".reply_type").hide();
+    $("#reply_type_"+type).show();
 });
 /**
  * 选择素材

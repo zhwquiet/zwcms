@@ -15,7 +15,8 @@ define('BIND_MODULE','Weixin');
 define('VERSION','2.0');//版本号
 // 定义应用目录
 define('APP_PATH','../Application/');
-define ( 'RUNTIME_PATH', '../Runtime/' );
+define('__ROOT__','..');
+define ('RUNTIME_PATH', '../Runtime/' );
 
 // 引入ThinkPHP入口文件
 require '../ThinkPHP/ThinkPHP.php';

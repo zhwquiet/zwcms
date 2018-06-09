@@ -19,11 +19,11 @@ class NavWidget extends Controller{
 		$tree = new \Tree($list);
         $list = $tree->leaf(0);
 		$this->assign('list',$list);
-		$play = $class['theme']?'Nav/'.$class['theme']:'Nav/index';
-		if(!is_file('./Application/Home/View/'.C('DEFAULT_THEME').'/'.$play)){
+		$play = $class['theme']?$class['theme']:'Nav/index.html';
+		if(!is_file($_SERVER['DOCUMENT_ROOT'].'/Application/Home/View/'.C('DEFAULT_THEME').'/'.$play)){
             $play = 'Nav/index';
         }
-
+        $play = str_replace('.html','',$play);
 		$this->theme(C('DEFAULT_THEME'))->display($play);
 	}
 }

@@ -46,44 +46,44 @@ function get_keyword() {
  * @param $type
  */
 function getbttype($type){
-    if($type==1){
+    if($type != 3){
         return 'click';
     }else{
         return 'view';
     }
 }
 
-/**
- * 拼装菜单json
- * author liuqi
- */
-function getbtjson($arr,$pid=0){
-    $lists=array();
-    foreach ($arr as $v) {
-        if ($v['pid'] == $pid) {
-            $list = array();
-            $list['type'] = getbttype($v['type']);
-            $list['name'] = $v['title'];
-            if (getbttype($v['type']) == 'click') {
-                $list['key'] = $v['keyword'];
-            } else {
-                $list['url'] = $v['url'];
-            }
-            foreach ($arr as $v2){
-                if($v2['pid']==$v['id']){
-                    $list2 = array();
-                    $list2['type'] = getbttype($v2['type']);
-                    $list2['name'] = $v2['title'];
-                    if (getbttype($v2['type']) == 'click') {
-                        $list2['key'] = $v2['keyword'];
-                    } else {
-                        $list2['url'] = $v2['url'];
-                    }
-                    $list['sub_button']=$list2;
-                    $lists['button'][] = $list;
-                }
-            }
-        }
-    }
-    return json_encode($lists,JSON_UNESCAPED_UNICODE);
-}
+///**
+// * 拼装菜单json
+// * author liuqi
+// */
+//function getbtjson($arr,$pid=0){
+//    $lists=array();
+//    foreach ($arr as $v) {
+//        if ($v['pid'] == $pid) {
+//            $list = array();
+//            $list['type'] = getbttype($v['type']);
+//            $list['name'] = $v['title'];
+//            if (getbttype($v['type']) == 'click') {
+//                $list['key'] = $v['keyword'];
+//            } else {
+//                $list['url'] = $v['url'];
+//            }
+//            foreach ($arr as $v2){
+//                if($v2['pid']==$v['id']){
+//                    $list2 = array();
+//                    $list2['type'] = getbttype($v2['type']);
+//                    $list2['name'] = $v2['title'];
+//                    if (getbttype($v2['type']) == 'click') {
+//                        $list2['key'] = $v2['keyword'];
+//                    } else {
+//                        $list2['url'] = $v2['url'];
+//                    }
+//                    $list['sub_button']=$list2;
+//                    $lists['button'][] = $list;
+//                }
+//            }
+//        }
+//    }
+//    return json_encode($lists,JSON_UNESCAPED_UNICODE);
+//}

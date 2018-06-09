@@ -22,7 +22,7 @@ return array(
 // 	'TMPL_ACTION_ERROR'     =>  'Public/error/404.html',
 // 	'TMPL_ACTION_SUCCESS'   =>  'Public/error/404.html',
 
-	'URL_ROUTER_ON'   => false,
+	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES'=>array(
 		//公共路由
 		

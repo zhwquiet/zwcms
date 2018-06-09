@@ -17,7 +17,7 @@ function quit(){
         btn: ['确定','取消'], //按钮
         title:'退出登录'
     }, function(){
-        window.location.href="admin.php?s=/Index/quit";
+        window.location.href="/admin.php/Index/quit";
     }, function(){
 
     });
@@ -442,60 +442,6 @@ $(document).on("click", '.bnt_pinyin', function () {
         }
     });
 });
-//选择模板列表页面
-$(document).on('click', "#list .bnt_temp", function () {
-    var config = $("#t3").attr("config");
-    if(config == '' || config == undefined){
-        layer.msg('请先选择模型', { icon: 2 });
-        return;
-    }
-    layer.open({
-        title: '模板选择',
-        type: 1,
-        shade: 0.2,
-        area: '340px',
-        content: "<div id='act_loading'><span class='ui-dialog-loading'>Loading..</span></div>"
-    });
-    $.ajax({
-        url: 'admin.php/Category/getListData',
-        type: 'POST',
-        async: false,
-        data: {'config': config},
-        success: function (data) {
-            var html = '<div>' +
-                '<div>提示：模板选择请谨慎操作</div>' +
-                '</div>';
-            $('#act_loading').replaceWith(data);
-        }
-    });
-})
-//选择模板详情页面
-$(document).on('click', "#show .bnt_temp", function () {
-    var config = $("#t3").attr("config");
-    if(config == '' || config == undefined){
-        layer.msg('请先选择模型', { icon: 2 });
-        return;
-    }
-    layer.open({
-        title: '模板选择',
-        type: 1,
-        shade: 0.2,
-        area: '340px',
-        content: "<div id='act_loading'><span class='ui-dialog-loading'>Loading..</span></div>"
-    });
-    $.ajax({
-        url: 'admin.php/Category/getShowData',
-        type: 'POST',
-        async: false,
-        data: {'config': config},
-        success: function (data) {
-            var html = '<div>' +
-                '<div>提示：模板选择请谨慎操作</div>' +
-                '</div>';
-            $('#act_loading').replaceWith(data);
-        }
-    });
-});
 //图片上传
 $(document).on('click','#upbtn',function(e){
     var idinput = $(this).prev();
@@ -598,20 +544,7 @@ $(document).on('click', '#s1', function () {
         $('#c1').val('');
     }
 });
-
-$(document).on('click', ".list_item", function () {
-    var config = $("#t3").attr("config");
-    var value = $(this).attr('attr_item');
-    $('#t8').val(config + '/' + value);
-    layer.closeAll();
-})
-$(document).on('click', ".show_item", function () {
-    var config = $("#t3").attr("config");
-    var value = $(this).attr('attr_item');
-    $('#t9').val(config + '/' + value);
-    layer.closeAll();
-})
+//清空选择主题、模板
 $(document).on('click',".bnt_clear",function(){
-    var id = $(this).attr('config');
-    $("#"+id).val('');
+    $(this).parents(".form_input").find("input.ip").val('');
 });

@@ -82,8 +82,9 @@ function getPinYin($str){
 	return $py->getAllPY($str);
 }
 function loopFun($dir) {
+    $r = __ROOT__?__ROOT__:'.';
     //取出文件或者文件夹
-    $list = scandir($dir);
+    $list = scandir($r.$dir);
     $result = array();
     foreach($list as $key=>$value){
         if (!in_array($value,array(".",".."))){

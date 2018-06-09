@@ -45,8 +45,8 @@ class ListController extends HomeController{
 			$this->assign('catedir',$cateinfo['catedir']);
 			$this->assign('page',$p);
 
-            if(!is_file('./Application/Home/View/'.C('DEFAULT_THEME').'/List/'.$html)){
-                $html = 'List/'.$cateinfo['list_temp'];
+            if(!is_file($_SERVER['DOCUMENT_ROOT'].'/Application/Home/View/'.C('DEFAULT_THEME').'/List/'.$html)){
+                $html = $cateinfo['list_temp'];
             }
 
 			$html = 'List/'.str_replace('.html','',$html);
@@ -109,11 +109,10 @@ class ListController extends HomeController{
 				$picarr = explode(',',$info['piclist']);
 				$this->assign('picarr',$picarr);
 			}
-            if(!is_file('./Application/Home/View/'.C('DEFAULT_THEME').'/List/'.$html)){
-                $html = 'List/'.$contentinfo['show_temp'];
+            if(!is_file($_SERVER['DOCUMENT_ROOT'].'/Application/Home/View/'.C('DEFAULT_THEME').'/List/'.$html)){
+                $html = $contentinfo['show_temp'];
             }
-			$html = 'List/'.str_replace('.html','',$html);
-
+            $html = 'List/'.str_replace('.html','',$html);
 			if($mode){
 				$this->buildHtml('List_info_'.$id, C('HTML_PATH'), $html, 'utf8');
 			}else{

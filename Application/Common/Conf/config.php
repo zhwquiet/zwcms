@@ -33,6 +33,16 @@ return array(
 	'VAR_URL_PARAMS'       => '', // PATHINFO URL参数变量
 	'URL_PATHINFO_DEPR'    => '/', //PATHINFO URL分割符
 
-	
+    /* 模板相关配置 */
+    'TMPL_PARSE_STRING_COM' => array(
+        '__CIMG__'    => '/Public/Common/images',
+        '__CCSS__'    => '/Public/Common/css',
+        '__CJS__'     => '/Public/Common/js',
+        '__CFONT__'   => '/Public/Common/font',
+        '__VENDOR__'  => '/Public/Vendor',
+        '__ASSETS__'  => '/Public/assets',
+    ),
+
+
 	'VERIFY_CODE'=>'ef5fadbb-df92-e551-471d-e126b0150038',
 );

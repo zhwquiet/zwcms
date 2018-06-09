@@ -107,7 +107,7 @@ class BookController extends AdminController{
         		$bookM->commit();
                 $this->config['expand']['bookopen'] = $data['bookOpen'];
                 $this->config['expand']['bookcheck'] = $data['bookLock'];
-                S('config',$this->config);
+                S(SERVER.'config',$this->config);
                 $redata['msg']='留言管理配置成功';
                 $redata['success']=true;
         	}else{

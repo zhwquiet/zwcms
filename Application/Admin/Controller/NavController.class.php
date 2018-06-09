@@ -53,6 +53,14 @@ class NavController extends AdminController{
         }
         $this->ajaxReturn($redata);
     }
+    /**
+     * 获得模板数据
+     */
+    public function getThemeData() {
+        $dirPath = '/Application/Home/View/'.DEFAULT_LANGUAGE.'/web/Nav';
+        $this->assign('list', loopFun($dirPath));
+        $this->display();
+    }
     public function index(){
         $classid = I('classid');
         $info = D('NavClass')->getinfo($classid);

@@ -41,6 +41,14 @@
                                     <input type="text" name="title" size="50" maxlength="20" class="ip" value="{$info.title}" data-rule="导航标题:required;" ></div>
                             </div>
                             <div class="form_group">
+                                <div class="form_txt">主题模板：</div>
+                                <div class="form_input">
+                                    <input type="text" name="theme" size="40" maxlength="100" class="ip" value="{$info.theme}" readonly>
+                                    <span><input type="button" value="选择" class="bnt_temp bnt_save"></span>
+                                    <span><input type="button" value="清空" class="bnt_clear bnt_normal">　可以为空</span>
+                                </div>
+                            </div>
+                            <div class="form_group">
                                 <div class="form_bnt">
                                     <button class="btn btn-white btn-info btn-round" type="submit">
                                         <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 保存
@@ -60,6 +68,31 @@
 </block>
 <block name="script">
     <script>
+        //选择模板详情页面
+        var theme_that;
+        $(document).on('click', ".bnt_temp", function () {
+            theme_that = $(this);
+            layer.open({
+                title: '主题选择',
+                type: 1,
+                shade: 0.2,
+                area: '340px',
+                content: "<div id='act_loading'><span class='ui-dialog-loading'>Loading..</span></div>"
+            });
+            $.ajax({
+                url: 'admin.php/Nav/getThemeData',
+                type: 'POST',
+                async: false,
+                success: function (data) {
+                    $('#act_loading').replaceWith(data);
+                }
+            });
+        });
+        $(document).on('click','.theme_item',function(){
+            var value = $(this).attr('attr_item');
+            theme_that.parents(".form_input").find("input.ip").val('Nav/'+value);
+            layer.closeAll();
+        });
         $(".formname").MotorsSubmit({
             ajaxurl:"{:U('Nav/classadd')}",
             loadurl:"{:U('Nav/classindex')}"

@@ -10,16 +10,15 @@ class AdminController extends BaseController{
 		if(empty($uid)){
 			$this->redirect('Login/index');
 		}
-        $this->config = S('config');
+        $this->config = S(SERVER.'config');
 		if(empty($this->config)){
 			$data = M('config')->select();
             foreach ($data as $v) {
                 $this->config[$v['setname']][$v['setkey']] = $v['setvalue'];
 			}
-			S('config',$this->config);
+			S(SERVER.'config',$this->config);
 		}
-        $menulist = S('menulist'.$uid);
-//		$menulist = null;
+        $menulist = S(SERVER.'menulist'.$uid);
         if(empty($menulist)){
 			$groupid = M('Admin')->where(array('id'=>$uid))->getField('groupid');
 			$pagelever = M('AdminGroup')->where(array('id'=>$groupid))->getField('pagelever');
@@ -31,7 +30,7 @@ class AdminController extends BaseController{
 			}else{
                 $menulist = null;
 			}
-			S('menulist'.$uid,$menulist);
+			S(SERVER.'menulist'.$uid,$menulist);
 		}
 
 		$this->assign('menulist',$menulist);

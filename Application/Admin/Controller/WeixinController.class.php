@@ -592,7 +592,30 @@ class WeixinController extends AdminController {
         $con['is_show']=1;
         //拼接菜单数据
         $data=D('weixinMenu')->alias('a')->join('left join zx_weixin_reply b on a.reply_id = b.id')->where($con)->field('a.id,a.pid,a.title,a.type,a.reply_id,a.url,b.keyword')->order('a.pid asc,a.sort asc')->select();
-        var_dump($data);die;
+        $tree = new \Tree($data);
+        $arr = $tree->leaf(0);
+        foreach ($arr as $key=>$v) {
+            $list[$key]['type'] = getbttype($v['type']);
+            $list[$key]['name'] = $v['title'];
+            if ($list[$key]['type'] == 'click') {
+                $list[$key]['key'] = $v['keyword'];
+            } else {
+                $list[$key]['url'] = $v['url'];
+            }
+            if(!empty($v['child'])){
+                foreach ($v['child'] as $cv){
+                    $temp['type'] = getbttype($cv['type']);
+                    $temp['name'] = $cv['title'];
+                    if ($temp['type'] == 'click') {
+                        $temp['key'] = $cv['keyword'];
+                    } else {
+                        $temp['url'] = $cv['url'];
+                    }
+                    $list[$key]['sub_button'][] = $temp;
+                }
+            }
+        }
+        $urljson = json_encode(array('button'=>$list),JSON_UNESCAPED_UNICODE);
         //获取access_token
         $access_token=get_access_token();
         if($access_token['error']){
@@ -600,7 +623,7 @@ class WeixinController extends AdminController {
             $this->ajaxReturn($redata);
         }
         $url="https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token['access_token'];
-        $result=https_request($url,getbtjson($data));
+        $result=https_request($url,$urljson);
         if($result['errcode'] == 0){
             $redata['success']=true;
             $redata['msg']="发布菜单成功";

@@ -9,9 +9,13 @@ namespace Common\Controller;
 use Think\Controller;
 class BaseController extends Controller{
     public function _initialize(){
-        $server = str_replace(array("/admin.php","/index.php","/mobile.php","/weixin.php",'/'.$_SERVER['PATH_INFO'],".html"), "", $_SERVER['PHP_SELF']);
+        $server = str_replace(array("/admin.php","/index.php","/mobile.php","/weixin.php",".html"), "", $_SERVER['PHP_SELF']);
+        if($_SERVER['PATH_INFO']){
+            $server = str_replace('/'.$_SERVER['PATH_INFO'],"",$server);
+        }
+        define('SERVER',$server);
         $this->assign('server',$server);
-        $server = str_replace("/","",$server);
+        $server = str_replace('/',"",$server);
         if($server){
             C('DB_NAME',C('DB_NAME')."_".$server);
             define('DEFAULT_LANGUAGE','english');//默认语言
