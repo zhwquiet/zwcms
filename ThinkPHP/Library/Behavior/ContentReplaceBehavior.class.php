@@ -32,16 +32,31 @@ class ContentReplaceBehavior {
             '__APP__'       =>  __APP__,        // 当前应用地址
             '__MODULE__'    =>  __MODULE__,
             '__ACTION__'    =>  __ACTION__,     // 当前操作地址
-            '__SELF__'      =>  __SELF__,       // 当前页面地址
+            '__SELF__'      =>  htmlentities(__SELF__),       // 当前页面地址
             '__CONTROLLER__'=>  __CONTROLLER__,
             '__URL__'       =>  __CONTROLLER__,
             '__PUBLIC__'    =>  __ROOT__.'/Public',// 站点公共目录
         );
         // 允许用户自定义模板的字符串替换
-        if(is_array(C('TMPL_PARSE_STRING')) )
-            $replace =  array_merge($replace,C('TMPL_PARSE_STRING'));
+//        if(is_array(C('TMPL_PARSE_STRING')) )
+//            $replace =  array_merge($replace,C('TMPL_PARSE_STRING'));
+//        $content = str_replace(array_keys($replace),array_values($replace),$content);
+//        return $content;
+//
+//
+
+
+        // 允许用户自定义模板的字符串替换
+        if(is_array(C('TMPL_PARSE_STRING')) ){
+            if (is_array(C('TMPL_PARSE_STRING_COM')))
+                $string_merge = array_merge (C('TMPL_PARSE_STRING_COM'), C('TMPL_PARSE_STRING'));
+            else
+                $string_merge = C('TMPL_PARSE_STRING');
+            $replace =  array_merge($replace,$string_merge);
+        }
         $content = str_replace(array_keys($replace),array_values($replace),$content);
         return $content;
+
     }
 
 }
