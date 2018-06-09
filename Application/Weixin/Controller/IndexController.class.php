@@ -121,6 +121,10 @@ class IndexController extends BaseController{
                                 case Wechat::MSG_EVENT_UNSUBSCRIBE:
                                     //取消关注，记录日志
                                     break;
+                                case Wechat::MSG_EVENT_CLICK:
+                                    //点击事件
+                                    $this->replyContent(1,$data['EventKey']);
+                                    break;
                                 default:
                                     //自动回复
                                     $this->replyContent(3);
