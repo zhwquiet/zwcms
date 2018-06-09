@@ -185,12 +185,15 @@ class IndexController extends BaseController{
                             $newslist = M('WeixinNews')->where($where)->field('id,title,abstract,pic_id')->select();
                             $arr = array();
                             foreach ($newslist as $key=>$v) {
-                                $arr[] = array(
+                                 $temp = array(
                                     $v['title'],
                                     $v['abstract'],
-                                    $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SERVER.'/weixin.php/News/index/id/'.$v['id'],
-                                    getattachurl($v['pic_id'])
+                                    $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SERVER.'/weixin.php/News/index/id/'.$v['id']
                                 );
+                                if($v['pic_id']){
+                                     $temp[] = getattachurl($v['pic_id']);
+                                }
+                                $arr[] = $temp;
                             }
                             $this->wechat->response($arr, Wechat::MSG_TYPE_NEWS);
                             break;
