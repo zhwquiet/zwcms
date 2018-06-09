@@ -195,7 +195,7 @@ class IndexController extends BaseController{
                                     $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SERVER.'/weixin.php/News/index/id/'.$v['id']
                                 );
                                 if($v['pic_id']){
-                                     $temp[] = getattachurl($v['pic_id']);
+                                     $temp[] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].getattachurl($v['pic_id']);
                                 }
                                 $arr[] = $temp;
                             }

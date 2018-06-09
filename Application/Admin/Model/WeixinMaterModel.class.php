@@ -20,6 +20,7 @@ class WeixinMaterModel extends Model{
                 'news_ids'=>$newsId,
                 'title'=>date('Y-m-d'),
                 'create_time'=>time(),
+                'type'=>1
             ));
         }else{
             $news_ids = $this->where(array('id'=>$mater_id))->getField('news_ids');
