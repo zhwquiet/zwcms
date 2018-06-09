@@ -75,7 +75,7 @@ class CommentController extends HomeController{
 			'content'=>$data['content'],
 			'createtime'=>time(),
 			'islock'=>$this->config['commentcheck']?'0':'1',
-			'postip'=>get_real_ip()
+			'postip'=>get_client_ip()
 		));
 		$updatere = $model->execute('update zx_content set comments=comments+1 where id = '.$id);
 		if($addre !==false && $updatere!==false){

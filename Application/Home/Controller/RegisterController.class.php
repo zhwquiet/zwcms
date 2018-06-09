@@ -77,7 +77,7 @@ class RegisterController extends HomeController{
 			'city'=>$regData['city'],
 			'dist'=>$regData['dist'],
 			'regtime'=>time(),
-			'regip'=>get_real_ip()
+			'regip'=>get_client_ip()
 		);
 		$addRe=$regM->addUser($addData);
 		if($addRe !== false){

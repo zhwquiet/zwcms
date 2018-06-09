@@ -5,9 +5,9 @@ return array(
     'APP_SUB_DOMAIN_RULES'    =>    array(
         'm'   =>    array('Home','theme=mobile'),  // m域名指向手机模式
     ),
-    'MODULE_ALLOW_LIST'  => array('Admin','Home','Common'
-    ),
+    'MODULE_ALLOW_LIST'  => array('Admin','Home','Common'),
 	'TAGLIB_PRE_LOAD'=>'zxcms',
+    'PageList' => 10,
 	'DATA_CACHE_TIME'=>3600,
 	/* 数据缓存设置 */
 	'DATA_CACHE_PREFIX'    => 'zxcms_', // 缓存前缀

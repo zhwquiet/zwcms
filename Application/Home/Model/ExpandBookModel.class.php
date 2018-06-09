@@ -12,6 +12,6 @@ class ExpandBookModel extends Model{
 	);
 	protected $_auto = array(
 		array('createtime','time',1,'function'),
-		array('postip','get_real_ip',1,'function')
+		array('postip','get_client_ip',1,'function')
 	);
 }

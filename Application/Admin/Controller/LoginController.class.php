@@ -69,7 +69,7 @@ class LoginController extends Controller{
             write_log($logdata);
         	$this->ajaxReturn($redata);
         }
-        $data['lastloginip']=get_real_ip();
+        $data['lastloginip']=get_client_ip();
         $data['lastlogintime']=time();
         $data['logincount']=$res['logincount']+1;
         $b=$admin->setLoginInfo($username,$data);

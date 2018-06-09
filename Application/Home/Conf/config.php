@@ -12,9 +12,10 @@ return array(
 	'HTML_PATH'=>'html/',
 	
 	'HTML_FILE_SUFFIX' => '.html',// 默认静态文件后缀
-	
-	'URL_MODEL'            => 2, //URL模式
 
+    'LOG_PATH' => __ROOT__.'/Runtime/Logs/Home/',
+
+	'URL_MODEL'            => 2, //URL模式
     /* 错误页面模板 */
     'OUTPUT_ENCODE' => true,
 // 	'ERROR_PAGE' => 'Public/error/404.html',

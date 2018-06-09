@@ -38,7 +38,7 @@ class SystemController extends AdminController{
                 $adminInfo['password'] = md5($adminInfo['password']);
                 $adminInfo['logincount'] = 0;
                 $adminInfo['lastlogintime'] = time();
-                $adminInfo['lastloginip'] = get_real_ip();
+                $adminInfo['lastloginip'] = get_client_ip();
 
                 if(!$model->create($adminInfo)){
                     $redata['msg'] = $model->getError();

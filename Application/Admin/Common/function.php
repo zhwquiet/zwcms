@@ -17,7 +17,7 @@ function tree($data,$pid=0,$level = 1){
     return $treeList ;
 }
 function write_log($arr){
-    $arr['loginip'] = get_real_ip();
+    $arr['loginip'] = get_client_ip();
     $arr['createtime'] = time();
     M('AdminLog')->add($arr);
 }

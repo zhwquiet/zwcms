@@ -59,7 +59,7 @@
 							<li><span>提交限制：</span>{:get_cfg_var("post_max_size")}</li>
 							<li><span>脚本超时：</span>{:get_cfg_var("max_execution_time")}秒</li>
 							<li><span>Gzip压缩：</span>{$Think.server.HTTP_ACCEPT_ENCODING}</li>
-							<li><span>客户端Ip：</span>{:	get_real_ip()}</li>
+							<li><span>客户端Ip：</span>{:	get_client_ip()}</li>
 							<li><span>程序版本：</span>Zwcms 2.0</li>
 						</ul>
 					</div>

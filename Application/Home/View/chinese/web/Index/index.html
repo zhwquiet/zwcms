@@ -6,7 +6,6 @@
 <body>
 <!-- 头部  -->
 <include file="Common/header"/>
-
 <!-- 导航  -->
 {:W('Nav/index',array('name'=>'headernav'))}
 
@@ -14,6 +13,15 @@
 {:W('Slide/index',array('name'=>'homeHeader'))}
 
 
+
+    {~$res = sqldata(array('table'=>"category",'where'=>"pid=0"))}
+    <volist name="res.list" id="v">
+        {$v.catename}<br/>
+        {~$vres = sqldata(array('table'=>"category",'where'=>"pid=$v[id]"))}
+        <volist name="vres.list" id="vv">
+            {$vv.catename}<br/>
+        </volist>
+    </volist>
 <include file="Common/footer"/>
 </body>
 </html>

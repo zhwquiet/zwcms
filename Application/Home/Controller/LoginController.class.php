@@ -48,7 +48,7 @@ class LoginController extends HomeController{
 			$this->ajaxReturn($info);
 		}
 		$model->where(array('id'=>$memberinfo['id']))->save(array(
-				'lastloginip'=>get_real_ip(),
+				'lastloginip'=>get_client_ip(),
 				'lastlogintime'=>time(),
 				'logincount'=>$memberinfo['logincount']+1
 		));

@@ -66,3 +66,31 @@ function getSubTree($id){
 	}
 	return substr($str,0,-1);
 }
+
+function sqldata($tag){
+    $table     =!empty($tag['table'])?C('DB_PREFIX').$tag['table']:'';
+    $join     =!empty($tag['join'])?$tag['join']:'';
+    $order     =!empty($tag['order'])?$tag['order']:'';
+    $limit     =!empty($tag['limit'])?$tag['limit']:C('PageList');
+    $where     =!empty($tag['where'])?$tag['where']:'1=1';
+    $page      =!empty($tag['page'])?$tag['page']:false;
+    $sql         =!empty($tag['sql'])?$tag['sql']:'';
+    $field     =!empty($tag['field'])?$tag['field']:'';
+    $debug     =!empty($tag['debug'])?$tag['debug']:false;
+    $model = M();
+
+    if($page){
+        $count = $model->table($table)->join($join)->count();
+        $p = new \Think\Page ($count,$limit);
+        $list = $model->table($table)->join($join)->where($where)->limit($p->firstRow,$p->listRows)->field($field)->order($order)->select();
+        $redata['totalCount'] = $count;
+        $redata['page'] = $p->show();
+    }else{
+        $list = $model->table($table)->join($join)->where($where)->field($field)->order($order)->select();
+    }
+    if($debug!=false){
+        dump($model->getLastSql());
+    }
+    $redata['list'] = $list;
+    return $redata;
+}
