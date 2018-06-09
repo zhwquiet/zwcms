@@ -45,7 +45,7 @@ class IndexController extends AdminController {
         $this->display();
     }
     public function quit(){
-    	S('menutree'.session('uid'),null);
+    	S(SERVER.'menulist'.session('uid'),null);
     	session('[destroy]');
     	$this->redirect('Login/index');
     }
